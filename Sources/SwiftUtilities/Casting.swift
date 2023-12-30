@@ -32,6 +32,7 @@
 /// let explicit = try cast(val, to: SomeOtherType.self) // Explicitly specify the type to cast to
 /// let implicit: SomeOtherType = try cast(val) // Infer the type to cast to from the call site
 /// ```
+///
 /// - Parameters:
 ///   - value: The value to cast
 ///   - type: The type to cast to

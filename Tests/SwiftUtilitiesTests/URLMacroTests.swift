@@ -1,5 +1,5 @@
 // SwiftUtilities
-// SwiftUtilitiesTests.swift
+// URLMacroTests.swift
 //
 // MIT License
 //
@@ -24,7 +24,7 @@
 // SOFTWARE.
 
 import SwiftSyntaxMacrosTestSupport
-@testable import SwiftUtilities
+import SwiftUtilities
 import SwiftUtilitiesCompilerPlugin
 import XCTest
 
@@ -60,6 +60,28 @@ final class URLMacroTest: XCTestCase {
                 .init(
                     message: "#URL requires a single string literal expression",
                     line: 2,
+                    column: 1
+                )
+            ],
+            macros: [
+                "URL": URLMacro.self
+            ]
+        )
+    }
+
+    func test_url_macro_invalid_literal() {
+        assertMacroExpansion(
+            """
+            #URL("")
+            """,
+            expandedSource:
+            """
+            #URL("")
+            """,
+            diagnostics: [
+                .init(
+                    message: "\"\" is not a valid URL",
+                    line: 1,
                     column: 1
                 )
             ],

@@ -1,5 +1,5 @@
 // SwiftUtilities
-// URLMacro.swift
+// CastingTests.swift
 //
 // MIT License
 //
@@ -23,29 +23,27 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import Foundation
-import MacroUtilities
-import SwiftCompilerPlugin
-import SwiftSyntax
-import SwiftSyntaxBuilder
-import SwiftSyntaxMacros
+import SwiftUtilities
+import XCTest
 
-public struct URLMacro: ExpressionMacro {
+final class CastingTests: XCTestCase {
 
-    public static func expansion<Node, Context>(
-        of node: Node,
-        in context: Context
-    ) throws -> ExprSyntax where Node: FreestandingMacroExpansionSyntax, Context: MacroExpansionContext {
-        guard case let .stringSegment(literal) = try node.argumentList.first?.expression
-            .as(StringLiteralExprSyntax.self)?
-            .segments.first
-            .mustExist("#URL requires a single string literal expression") else {
-            throw MacroError("#URL requires a single string literal expression")
-        }
-        guard URL(string: literal.content.text) != nil else {
-            throw MacroError("\"\(literal.content.text)\" is not a valid URL")
-        }
-        return "URL(string: \"\(raw: literal.content.text)\")!"
+    class MyType {
+        init() {}
+    }
+
+    final class MySubType: MyType {}
+
+    final class MyOtherType {}
+
+    func test_cast_valid() {
+        let instance = MySubType()
+        XCTAssertNoThrow(try cast(instance, to: MyType.self))
+    }
+
+    func test_cast_invalid() {
+        let instance = MyOtherType()
+        XCTAssertThrowsError(try cast(instance, to: MyType.self))
     }
 
 }

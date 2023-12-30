@@ -21,9 +21,9 @@ let package = Package(
             ]
         ),
         .library(
-            name: "SwiftMacroUtilities",
+            name: "MacroUtilities",
             targets: [
-                "SwiftMacroUtilities"
+                "MacroUtilities"
             ]
         )
     ],
@@ -41,7 +41,7 @@ let package = Package(
             ]
         ),
         .target(
-            name: "SwiftMacroUtilities",
+            name: "MacroUtilities",
             dependencies: [
                 .product(
                     name: "SwiftSyntaxMacros",
@@ -64,7 +64,7 @@ let package = Package(
                     name: "SwiftCompilerPlugin",
                     package: "swift-syntax"
                 ),
-                "SwiftMacroUtilities",
+                "MacroUtilities",
             ]
         ),
         .testTarget(
@@ -72,8 +72,11 @@ let package = Package(
             dependencies: [
                 "SwiftUtilities",
                 "SwiftUtilitiesCompilerPlugin",
-                "SwiftMacroUtilities",
-                .product(name: "SwiftSyntaxMacrosTestSupport", package: "swift-syntax")
+                "MacroUtilities",
+                .product(
+                    name: "SwiftSyntaxMacrosTestSupport",
+                    package: "swift-syntax"
+                )
             ]
         ),
     ]
