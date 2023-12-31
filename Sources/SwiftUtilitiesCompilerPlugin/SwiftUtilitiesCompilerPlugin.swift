@@ -30,5 +30,6 @@ import SwiftSyntaxMacros
 struct SwiftUtilitiesCompilerPlugin: CompilerPlugin {
     let providingMacros: [Macro.Type] = [
         URLMacro.self,
+        MailToMacro.self
     ]
 }

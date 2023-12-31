@@ -1,5 +1,5 @@
 // SwiftUtilities
-// URLMacro.swift
+// MailToMacro.swift
 //
 // MIT License
 //
@@ -30,7 +30,7 @@ import SwiftSyntax
 import SwiftSyntaxBuilder
 import SwiftSyntaxMacros
 
-public struct URLMacro: ExpressionMacro {
+public struct MailToMacro: ExpressionMacro {
 
     // MARK: - ExpressionMacro
 
@@ -41,35 +41,23 @@ public struct URLMacro: ExpressionMacro {
         guard case let .stringSegment(literal) = try node.argumentList.first?.expression
             .as(StringLiteralExprSyntax.self)?
             .segments.first
-            .mustExist("#URL requires a single string literal expression") else {
-            throw MacroError("#URL requires a single string literal expression")
+            .mustExist("#MailTo requires a single string literal expression") else {
+            throw MacroError("MailTo requires a single string literal expression")
         }
-        let strict: Bool
-        if let argument = node.argumentList.dropFirst().first?.expression.as(BooleanLiteralExprSyntax.self)?.literal,
-           argument.tokenKind == .keyword(.false) {
-            return try "URL(string: \"\(raw: evaluate(literal.content.text))\")!"
-        } else {
-            return try "URL(string: \"\(raw: strictlyEvaluate(literal.content.text))\")!"
-        }
-
+        let email = try validateEmail(literal.content.text)
+        return "URL(string: \"\(raw: email)\")!"
     }
 
     // MARK: - Private
 
-    private static func strictlyEvaluate(_ string: String) throws -> String {
+    private static func validateEmail(_ email: String) throws -> String {
+        let link = "mailto:\(email)"
         let detector = try! NSDataDetector(types: NSTextCheckingResult.CheckingType.link.rawValue)
-        guard let match = detector.firstMatch(in: string, options: [], range: NSRange(location: 0, length: string.utf16.count)),
-              match.range.length == string.utf16.count else {
-            throw MacroError("\"\(string)\" is not a valid URL")
+        guard let match = detector.firstMatch(in: link, options: [], range: NSRange(location: 0, length: link.utf16.count)),
+              match.range.length == link.utf16.count else {
+            throw MacroError("\"\(email)\" is not a valid email address")
         }
-        return string
-    }
-
-    private static func evaluate(_ string: String) throws -> String {
-        guard URL(string: string) != nil else {
-            throw MacroError("\"\(string)\" is not a valid URL")
-        }
-        return string
+        return link
     }
 
 }

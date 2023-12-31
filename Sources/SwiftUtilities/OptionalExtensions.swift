@@ -25,6 +25,27 @@
 
 public extension Optional {
 
+    /// Returns `true` if the optional contains a value, otherwise `false`
+    ///
+    /// Use this in place of a null check.
+    ///
+    /// ```swift
+    /// let value: String?
+    ///
+    /// func doSomething() -> Bool {
+    ///     return value != nil
+    /// }
+    /// ```
+    ///
+    /// Can be written as
+    ///
+    /// ```swift
+    /// let value: String?
+    ///
+    /// func doSomething() -> Bool {
+    ///     return value.exists
+    /// }
+    /// ```
     var exists: Bool {
         switch self {
         case .some:
@@ -34,6 +55,24 @@ public extension Optional {
         }
     }
 
+    /// Unwraps the optional, or throws an error if the optional is `.none`
+    ///
+    /// ```swift
+    /// let value: Bool? = nil
+    /// do {
+    ///     let bool = try value.mustExist("A required value was null")
+    /// } catch {
+    ///     // Handle error
+    /// }
+    /// ```
+    /// - Parameters:
+    ///   - message: The message to use if the optional is nil
+    ///   - file: The file containing the call site
+    ///   - function: The function containing the call site
+    ///   - line: The line number of the call site
+    ///   - column: The column number of the call site
+    /// - Returns: The unwrapped optional
+    /// - Throws: An ``ErrorMessage``, if the optional is `.none`
     @discardableResult
     func mustExist(
         _ message: String,

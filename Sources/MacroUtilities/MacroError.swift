@@ -26,7 +26,7 @@
 import Foundation
 
 /// An error used to indicate the failure of a Swift Macro expansion
-public struct MacroError: LocalizedError, CustomStringConvertible {
+public struct MacroError: LocalizedError, CustomStringConvertible, Equatable, Hashable, Sendable {
 
     // MARK: - Initializers
 

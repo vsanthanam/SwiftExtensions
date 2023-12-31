@@ -1,5 +1,5 @@
 // SwiftUtilities
-// StringInterpolation.swift
+// MailToMacroTests.swift
 //
 // MIT License
 //
@@ -23,20 +23,28 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import Foundation
+import SwiftSyntaxMacrosTestSupport
+import SwiftUtilities
+import SwiftUtilitiesCompilerPlugin
+import XCTest
 
-public extension String.StringInterpolation {
+final class MailToMacroTests: XCTestCase {
 
-    mutating func appendInterpolation(debug value: some CustomDebugStringConvertible) {
-        appendInterpolation(value.debugDescription)
-    }
+    func test_mailto_macro_expansion() {
 
-    mutating func appendInterpolation(error: any Error) {
-        appendInterpolation(error.localizedDescription)
-    }
+        assertMacroExpansion(
+            """
+            let x = #MailTo("talkto@vsanthanam.com")
+            """,
+            expandedSource:
+            """
+            let x = URL(string: "mailto:talkto@vsanthanam.com")!
+            """,
+            macros: [
+                "MailTo": MailToMacro.self
+            ]
+        )
 
-    mutating func raw<T>(raw value: T) where T: RawRepresentable, T.RawValue: CustomStringConvertible {
-        appendInterpolation(value.rawValue.description)
     }
 
 }

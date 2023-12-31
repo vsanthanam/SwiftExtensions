@@ -39,6 +39,19 @@ import Foundation
 /// let url = URL(string: "https://www.apple.com")!
 /// ```
 ///
-/// The forced unwrapping in the expanded code is gauranteed to never fail, because the macro validates the string literal at compile time and fails if the string is not a valid URL
+/// The forced unwrapping in the expanded code is gauranteed to never fail, because the macro validates the string literal at compile time and produces a diagnostic if the provide string is not a valid URL
+///
+/// - Parameters:
+///   - value: A literal string to convert into a `URL`
+///   - strict: Whether or not the string should be evaluated strictly
+/// - Returns: A `URL` based on the provided string literal
 @freestanding(expression)
-public macro URL(_ value: String) -> URL = #externalMacro(module: "SwiftUtilitiesCompilerPlugin", type: "URLMacro")
+public macro URL(
+    _ value: String,
+    strict: Bool = true
+) -> URL = #externalMacro(module: "SwiftUtilitiesCompilerPlugin", type: "URLMacro")
+
+@freestanding(expression)
+public macro MailTo(
+    _ value: String
+) -> URL = #externalMacro(module: "SwiftUtilitiesCompilerPlugin", type: "MailToMacro")

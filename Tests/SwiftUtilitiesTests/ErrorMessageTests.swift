@@ -1,5 +1,5 @@
 // SwiftUtilities
-// StringInterpolation.swift
+// ErrorMessageTests.swift
 //
 // MIT License
 //
@@ -23,20 +23,19 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import Foundation
+import SwiftUtilities
+import XCTest
 
-public extension String.StringInterpolation {
+final class ErrorMessageTests: XCTestCase {
 
-    mutating func appendInterpolation(debug value: some CustomDebugStringConvertible) {
-        appendInterpolation(value.debugDescription)
-    }
-
-    mutating func appendInterpolation(error: any Error) {
-        appendInterpolation(error.localizedDescription)
-    }
-
-    mutating func raw<T>(raw value: T) where T: RawRepresentable, T.RawValue: CustomStringConvertible {
-        appendInterpolation(value.rawValue.description)
+    func test_initializer() {
+        let message = ErrorMessage("My custom error message")
+        XCTAssertEqual(message.message, "My custom error message")
+        XCTAssertEqual(message.errorDescription, "My custom error message")
+        XCTAssertEqual(message.file.description, "SwiftUtilitiesTests/ErrorMessageTests.swift")
+        XCTAssertEqual(message.function.description, "test_initializer()")
+        XCTAssertEqual(message.line, 14)
+        XCTAssertEqual(message.column, 35)
     }
 
 }

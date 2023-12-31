@@ -31,6 +31,13 @@ public struct ErrorMessage: LocalizedError, CustomStringConvertible, Equatable, 
     // MARK: - Initializers
 
     /// Create an error message
+    ///
+    /// Use this struct to throw an error without creating a dedicated `Error`-conforming type.
+    ///
+    /// ```swift
+    /// throw ErrorMessage("Some message describing the error")
+    /// ```
+    ///
     /// - Parameters:
     ///   - message: The message to wrap in the error
     ///   - file: The file containing the call site where the error was initialized

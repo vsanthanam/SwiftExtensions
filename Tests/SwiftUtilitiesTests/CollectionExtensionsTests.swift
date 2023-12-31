@@ -1,5 +1,5 @@
 // SwiftUtilities
-// StringInterpolation.swift
+// CollectionExtensionsTests.swift
 //
 // MIT License
 //
@@ -23,20 +23,23 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import Foundation
+import SwiftUtilities
+import XCTest
 
-public extension String.StringInterpolation {
+final class CollectionExtensionsTests: XCTestCase {
 
-    mutating func appendInterpolation(debug value: some CustomDebugStringConvertible) {
-        appendInterpolation(value.debugDescription)
+    func test_sorted() {
+        let scores = [Score(value: 12), Score(value: 1), Score(value: 19)]
+        XCTAssertEqual(scores.sorted(by: \.value).map(\.value), [1, 12, 19])
     }
 
-    mutating func appendInterpolation(error: any Error) {
-        appendInterpolation(error.localizedDescription)
+    func test_sorted_reverse() {
+        let scores = [Score(value: 12), Score(value: 1), Score(value: 19)]
+        XCTAssertEqual(scores.sorted(by: \.value, order: .reverse).map(\.value), [19, 12, 1])
     }
 
-    mutating func raw<T>(raw value: T) where T: RawRepresentable, T.RawValue: CustomStringConvertible {
-        appendInterpolation(value.rawValue.description)
+    struct Score {
+        let value: Int
     }
 
 }

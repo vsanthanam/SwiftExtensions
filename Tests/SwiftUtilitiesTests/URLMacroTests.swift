@@ -33,6 +33,21 @@ final class URLMacroTest: XCTestCase {
     func test_url_macro_valid() {
         assertMacroExpansion(
             """
+            #URL("23489fjpoasfljkn134lkjnj.a,1984pj", strict: false)
+            """,
+            expandedSource:
+            """
+            URL(string: "23489fjpoasfljkn134lkjnj.a,1984pj")!
+            """,
+            macros: [
+                "URL": URLMacro.self
+            ]
+        )
+    }
+
+    func test_url_macro_valid_strict() {
+        assertMacroExpansion(
+            """
             #URL("https://www.apple.com")
             """,
             expandedSource:
@@ -72,11 +87,11 @@ final class URLMacroTest: XCTestCase {
     func test_url_macro_invalid_literal() {
         assertMacroExpansion(
             """
-            #URL("")
+            #URL("", strict: false)
             """,
             expandedSource:
             """
-            #URL("")
+            #URL("", strict: false)
             """,
             diagnostics: [
                 .init(
@@ -90,4 +105,27 @@ final class URLMacroTest: XCTestCase {
             ]
         )
     }
+
+    func test_url_macro_invalid_literal_strict() {
+        assertMacroExpansion(
+            """
+            #URL("23489fjpoasfljkn134lkjnj.a,1984pj")
+            """,
+            expandedSource:
+            """
+            #URL("23489fjpoasfljkn134lkjnj.a,1984pj")
+            """,
+            diagnostics: [
+                .init(
+                    message: "\"23489fjpoasfljkn134lkjnj.a,1984pj\" is not a valid URL",
+                    line: 1,
+                    column: 1
+                )
+            ],
+            macros: [
+                "URL": URLMacro.self
+            ]
+        )
+    }
+
 }

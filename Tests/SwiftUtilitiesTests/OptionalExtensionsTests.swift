@@ -1,5 +1,5 @@
 // SwiftUtilities
-// StringInterpolation.swift
+// OptionalExtensionsTests.swift
 //
 // MIT License
 //
@@ -23,20 +23,19 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import Foundation
+import SwiftUtilities
+import XCTest
 
-public extension String.StringInterpolation {
+final class OptionalExtensionsTests: XCTestCase {
 
-    mutating func appendInterpolation(debug value: some CustomDebugStringConvertible) {
-        appendInterpolation(value.debugDescription)
+    func test_exists_true() {
+        let value: Bool? = false
+        XCTAssertTrue(value.exists)
     }
 
-    mutating func appendInterpolation(error: any Error) {
-        appendInterpolation(error.localizedDescription)
-    }
-
-    mutating func raw<T>(raw value: T) where T: RawRepresentable, T.RawValue: CustomStringConvertible {
-        appendInterpolation(value.rawValue.description)
+    func test_exists_false() {
+        let value: Bool? = nil
+        XCTAssertFalse(value.exists)
     }
 
 }
