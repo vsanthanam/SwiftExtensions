@@ -79,5 +79,25 @@ let package = Package(
                 )
             ]
         ),
+        .testTarget(
+            name: "MacroUtilitiesTests",
+            dependencies: [
+                "MacroUtilities",
+                .product(
+                    name: "SwiftDiagnostics",
+                    package: "swift-syntax"
+                )
+            ]
+        ),
+        .testTarget(
+            name: "SwiftUtilitiesCompilerPluginTests",
+            dependencies: [
+                "SwiftUtilitiesCompilerPlugin",
+                .product(
+                    name: "SwiftSyntaxMacros",
+                    package: "swift-syntax"
+                )
+            ]
+        )
     ]
 )

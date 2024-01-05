@@ -74,14 +74,13 @@ public extension Optional {
     /// ```swift
     /// let declaration = try token
     ///     .as(StructDeclSyntax.self)
-    ///     .mustExist("Macro expected a struct")
+    ///     .unwrap("Macro expected a struct")
     /// ```
     ///
     /// - Parameter message: The message to use in the error, if the optional doesn't contain a valie
     /// - Returns: The unwrapped optional
     /// - Throws: A ``MacroError``, if the optional doesn't contain a value.
-    @discardableResult
-    func mustExist(
+    func unwrap(
         _ message: String = "Macro expansion failed."
     ) throws -> Wrapped {
         switch self {

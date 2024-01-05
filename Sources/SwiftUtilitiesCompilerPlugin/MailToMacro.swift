@@ -41,7 +41,7 @@ public struct MailToMacro: ExpressionMacro {
         guard case let .stringSegment(literal) = try node.argumentList.first?.expression
             .as(StringLiteralExprSyntax.self)?
             .segments.first
-            .mustExist("#MailTo requires a single string literal expression") else {
+            .unwrap("#MailTo requires a single string literal expression") else {
             throw MacroError("MailTo requires a single string literal expression")
         }
         let email = try validateEmail(literal.content.text)

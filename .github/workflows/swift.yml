@@ -17,7 +17,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Xcode Version
-      run: sudo xcode-select --switch /Applications/Xcode_15.0.app
+      run: sudo xcode-select --switch /Applications/Xcode_15.1.app
     - name: Build
       run: set -o pipefail && swift build -v | xcbeautify
     - name: Run tests

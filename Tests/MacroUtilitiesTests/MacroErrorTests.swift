@@ -1,5 +1,5 @@
 // SwiftUtilities
-// StringInterpolation.swift
+// MacroErrorTests.swift
 //
 // MIT License
 //
@@ -23,20 +23,36 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import Foundation
+import MacroUtilities
+import XCTest
 
-public extension String.StringInterpolation {
+final class MacroErrorTests: XCTestCase {
 
-    mutating func appendInterpolation(debug value: some CustomDebugStringConvertible) {
-        appendInterpolation(value.debugDescription)
+    func test_initializer() {
+        let message = MacroError("My custom error message")
+        XCTAssertEqual(message.reason, "My custom error message")
+        XCTAssertEqual(message.errorDescription, "My custom error message")
+        XCTAssertEqual(message.description, "My custom error message")
     }
 
-    mutating func appendInterpolation(error: any Error) {
-        appendInterpolation(error.localizedDescription)
+    func test_exists_true() {
+        let value: Bool? = false
+        XCTAssertTrue(value.exists)
     }
 
-    mutating func raw<T>(raw value: T) where T: RawRepresentable, T.RawValue: CustomStringConvertible {
-        appendInterpolation(value.rawValue.description)
+    func test_exists_false() {
+        let value: Bool? = nil
+        XCTAssertFalse(value.exists)
+    }
+
+    func test_unwrap_throws() {
+        let val: Bool? = nil
+        XCTAssertThrowsError(try val.unwrap())
+    }
+
+    func test_unwrap_doesnt_throws() {
+        let val: Bool? = false
+        XCTAssertNoThrow(try val.unwrap())
     }
 
 }

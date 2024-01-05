@@ -1,5 +1,5 @@
 // SwiftUtilities
-// OptionalExtensionsTests.swift
+// SimpleDiagnostic.swift
 //
 // MIT License
 //
@@ -23,29 +23,29 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import SwiftUtilities
+import MacroUtilities
+import SwiftDiagnostics
 import XCTest
 
-final class OptionalExtensionsTests: XCTestCase {
+final class SimpleDiagnosticTests: XCTestCase {
 
-    func test_exists_true() {
-        let value: Bool? = false
-        XCTAssertTrue(value.exists)
-    }
-
-    func test_exists_false() {
-        let value: Bool? = nil
-        XCTAssertFalse(value.exists)
-    }
-
-    func test_mustExist_throws() {
-        let val: Bool? = nil
-        XCTAssertThrowsError(try val.mustExist("Some error"))
-    }
-
-    func test_mustExist_doesnt_throws() {
-        let val: Bool? = false
-        XCTAssertNoThrow(try val.mustExist("Some error"))
+    func test_initializers() {
+        XCTAssertEqual(
+            SimpleDiagnostic(
+                message: "Message",
+                diagnosticID: .init(
+                    domain: "domain",
+                    id: "identifier"
+                ),
+                severity: .error
+            ),
+            SimpleDiagnostic(
+                message: "Message",
+                domain: "domain",
+                id: "identifier",
+                severity: .error
+            )
+        )
     }
 
 }

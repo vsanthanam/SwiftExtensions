@@ -41,10 +41,9 @@ public struct URLMacro: ExpressionMacro {
         guard case let .stringSegment(literal) = try node.argumentList.first?.expression
             .as(StringLiteralExprSyntax.self)?
             .segments.first
-            .mustExist("#URL requires a single string literal expression") else {
+            .unwrap("#URL requires a single string literal expression") else {
             throw MacroError("#URL requires a single string literal expression")
         }
-        let strict: Bool
         if let argument = node.argumentList.dropFirst().first?.expression.as(BooleanLiteralExprSyntax.self)?.literal,
            argument.tokenKind == .keyword(.false) {
             return try "URL(string: \"\(raw: evaluate(literal.content.text))\")!"
