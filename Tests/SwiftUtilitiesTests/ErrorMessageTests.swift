@@ -34,8 +34,25 @@ final class ErrorMessageTests: XCTestCase {
         XCTAssertEqual(message.errorDescription, "My custom error message")
         XCTAssertEqual(message.file.description, "SwiftUtilitiesTests/ErrorMessageTests.swift")
         XCTAssertEqual(message.function.description, "test_initializer()")
-        XCTAssertEqual(message.line, 14)
+        XCTAssertEqual(message.line, 32)
         XCTAssertEqual(message.column, 35)
     }
 
+    func test_description() {
+        let message = ErrorMessage("New message")
+        XCTAssertEqual(message.description, "SwiftUtilitiesTests/ErrorMessageTests.swift:test_description():42:35:New message")
+    }
+
+    func test_equatable() {
+        let message1 = ErrorMessage("Foo", file: "Bar", function: "Baz", line: 12, column: 24)
+        let message2 = ErrorMessage("Foo", file: "Bar", function: "Baz", line: 12, column: 24)
+        XCTAssertEqual(message1, message2)
+    }
+
+    func test_hashable() {
+        let message = ErrorMessage("Hashable")
+        var dictionary = [ErrorMessage: String]()
+        dictionary[message] = "foo"
+        XCTAssertEqual(dictionary[message], "foo")
+    }
 }

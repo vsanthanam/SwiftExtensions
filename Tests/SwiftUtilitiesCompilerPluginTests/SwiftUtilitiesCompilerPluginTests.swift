@@ -1,5 +1,5 @@
 // SwiftUtilities
-// OptionalExtensionsTests.swift
+// SwiftUtilitiesCompilerPluginTests.swift
 //
 // MIT License
 //
@@ -23,29 +23,16 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import SwiftUtilities
+import SwiftSyntaxMacros
+@testable import SwiftUtilitiesCompilerPlugin
 import XCTest
 
-final class OptionalExtensionsTests: XCTestCase {
+final class SwiftUtilitiesCompilerPluginTests: XCTestCase {
 
-    func test_exists_true() {
-        let value: Bool? = false
-        XCTAssertTrue(value.exists)
-    }
-
-    func test_exists_false() {
-        let value: Bool? = nil
-        XCTAssertFalse(value.exists)
-    }
-
-    func test_mustExist_throws() {
-        let val: Bool? = nil
-        XCTAssertThrowsError(try val.mustExist("Some error"))
-    }
-
-    func test_mustExist_doesnt_throws() {
-        let val: Bool? = false
-        XCTAssertNoThrow(try val.mustExist("Some error"))
+    func test_macro_availability() {
+        let plugin = SwiftUtilitiesCompilerPlugin()
+        let macros: [Macro.Type] = [URLMacro.self, MailToMacro.self]
+        XCTAssert(plugin.providingMacros.description == macros.description)
     }
 
 }
