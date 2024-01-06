@@ -88,16 +88,6 @@ let package = Package(
                     package: "swift-syntax"
                 )
             ]
-        ),
-        .testTarget(
-            name: "SwiftUtilitiesCompilerPluginTests",
-            dependencies: [
-                "SwiftUtilitiesCompilerPlugin",
-                .product(
-                    name: "SwiftSyntaxMacros",
-                    package: "swift-syntax"
-                )
-            ]
         )
     ]
 )
