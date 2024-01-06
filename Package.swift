@@ -32,6 +32,10 @@ let package = Package(
             url: "https://github.com/apple/swift-syntax.git",
             from: "509.0.0"
         ),
+        .package(
+            url: "https://github.com/nicklockwood/SwiftFormat",
+            exact: "0.52.11"
+        )
     ],
     targets: [
         .target(
