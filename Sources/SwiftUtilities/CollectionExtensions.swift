@@ -23,44 +23,48 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import Foundation
+#if canImport(Foundation)
 
-public extension Collection {
+    import Foundation
 
-    /// Sort the collection using a Swift key path
-    ///
-    /// The KeyPath's `Value` must conform to `Comparable`
-    ///
-    /// ```swift
-    /// struct Score: CustomStringConvertible {
-    ///     let value: Int
-    ///     var description: String { value.description }
-    /// }
-    ///
-    /// let scores = [Score(value: 12), Score(value: 1), Score(value: 19)]
-    /// let sorted = scores.sorted(by: \.value)
-    /// print(sorted) // Prints ["1", "12", "19"]
-    ///
-    /// ```
-    ///
-    /// - Parameters:
-    ///   - keyPath: key path
-    ///   - order: The sort order
-    /// - Returns: An array containing the sorted collection
-    func sorted(
-        by keyPath: KeyPath<Element, some Comparable>,
-        order: SortOrder = .forward
-    ) -> [Element] {
-        switch order {
-        case .forward:
-            sorted { lhs, rhs in
-                lhs[keyPath: keyPath] < rhs[keyPath: keyPath]
-            }
-        case .reverse:
-            sorted { lhs, rhs in
-                lhs[keyPath: keyPath] > rhs[keyPath: keyPath]
+    public extension Collection {
+
+        /// Sort the collection using a Swift key path
+        ///
+        /// The KeyPath's `Value` must conform to `Comparable`
+        ///
+        /// ```swift
+        /// struct Score: CustomStringConvertible {
+        ///     let value: Int
+        ///     var description: String { value.description }
+        /// }
+        ///
+        /// let scores = [Score(value: 12), Score(value: 1), Score(value: 19)]
+        /// let sorted = scores.sorted(by: \.value)
+        /// print(sorted) // Prints ["1", "12", "19"]
+        ///
+        /// ```
+        ///
+        /// - Parameters:
+        ///   - keyPath: key path
+        ///   - order: The sort order
+        /// - Returns: An array containing the sorted collection
+        func sorted(
+            by keyPath: KeyPath<Element, some Comparable>,
+            order: SortOrder = .forward
+        ) -> [Element] {
+            switch order {
+            case .forward:
+                sorted { lhs, rhs in
+                    lhs[keyPath: keyPath] < rhs[keyPath: keyPath]
+                }
+            case .reverse:
+                sorted { lhs, rhs in
+                    lhs[keyPath: keyPath] > rhs[keyPath: keyPath]
+                }
             }
         }
+
     }
 
-}
+#endif

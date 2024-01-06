@@ -23,10 +23,14 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import Foundation
+#if canImport(Foundation)
+
+    import Foundation
+
+#endif
 
 /// A reusable Swift `Error` with a message
-public struct ErrorMessage: LocalizedError, CustomStringConvertible, Equatable, Hashable, Sendable {
+public struct ErrorMessage: Error, CustomStringConvertible, Equatable, Hashable, Sendable {
 
     // MARK: - Initializers
 
@@ -92,8 +96,12 @@ public struct ErrorMessage: LocalizedError, CustomStringConvertible, Equatable, 
 
     // MARK: - LocalizedError
 
-    @_documentation(visibility: internal)
-    public var errorDescription: String? { message }
+    #if canImport(Foundation)
+
+        @_documentation(visibility: internal)
+        public var errorDescription: String? { message }
+
+    #endif
 
     // MARK: - Hashable
 
@@ -112,3 +120,9 @@ public struct ErrorMessage: LocalizedError, CustomStringConvertible, Equatable, 
 public func == (lhs: ErrorMessage, rhs: ErrorMessage) -> Bool {
     lhs.message == rhs.message && lhs.file.description == rhs.file.description && lhs.function.description == rhs.function.description && lhs.line == rhs.line && lhs.column == rhs.column
 }
+
+#if canImport(Foundation)
+
+    extension ErrorMessage: LocalizedError {}
+
+#endif

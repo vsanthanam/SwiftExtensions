@@ -23,7 +23,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import Foundation
+#if canImport(Foundation)
+
+    import Foundation
+
+#endif
 
 public extension Array {
 
@@ -49,16 +53,20 @@ public extension Array {
         self[safe: index] ?? defaultValue()
     }
 
-    /// Sort the array using a Swift key path in place
-    /// - Parameters:
-    ///   - keyPath: The keypath used to sort
-    ///   - order: The sort order
-    mutating func sort(
-        by keyPath: KeyPath<Element, some Comparable>,
-        order: SortOrder = .forward
-    ) {
-        self = sorted(by: keyPath, order: order)
-    }
+    #if canImport(Foundation)
+
+        /// Sort the array using a Swift key path in place
+        /// - Parameters:
+        ///   - keyPath: The keypath used to sort
+        ///   - order: The sort order
+        mutating func sort(
+            by keyPath: KeyPath<Element, some Comparable>,
+            order: SortOrder = .forward
+        ) {
+            self = sorted(by: keyPath, order: order)
+        }
+
+    #endif
 
     /// Create an array with all `nil` values removed
     /// - Returns: The filtered array without `nil` values
