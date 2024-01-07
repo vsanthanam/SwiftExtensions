@@ -81,13 +81,13 @@ public extension Optional {
     /// - Returns: The unwrapped optional
     /// - Throws: A ``MacroError``, if the optional doesn't contain a value.
     func unwrap(
-        _ message: String = "Macro expansion failed."
+        _ message: @autoclosure () -> String = "Macro expansion failed."
     ) throws -> Wrapped {
         switch self {
         case let .some(value):
             return value
         case .none:
-            throw MacroError(message)
+            throw MacroError(message())
         }
     }
 

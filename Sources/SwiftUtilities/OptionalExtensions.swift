@@ -75,7 +75,7 @@ public extension Optional {
     /// - Throws: An ``ErrorMessage``, if the optional is `.none`
     @discardableResult
     func mustExist(
-        _ message: String,
+        _ message: @autoclosure () -> String,
         file: StaticString = #fileID,
         function: StaticString = #function,
         line: UInt = #line,
@@ -86,7 +86,7 @@ public extension Optional {
             return value
         case .none:
             throw ErrorMessage(
-                message,
+                message(),
                 file: file,
                 function: function,
                 line: line,
