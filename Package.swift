@@ -25,12 +25,18 @@ let package = Package(
             targets: [
                 "MacroUtilities"
             ]
+        ),
+        .library(
+            name: "UIUtilities",
+            targets: [
+                "UIUtilities"
+            ]
         )
     ],
     dependencies: [
         .package(
             url: "https://github.com/apple/swift-syntax.git",
-            from: "509.0.0"
+            from: "509.1.0"
         ),
         .package(
             url: "https://github.com/nicklockwood/SwiftFormat",
@@ -57,6 +63,12 @@ let package = Package(
                 )
             ]
         ),
+        .target(
+            name: "UIUtilities",
+            dependencies: [
+                "SwiftUtilitiesCompilerPlugin"
+            ]
+        ),
         .macro(
             name: "SwiftUtilitiesCompilerPlugin",
             dependencies: [
@@ -75,6 +87,18 @@ let package = Package(
             name: "SwiftUtilitiesTests",
             dependencies: [
                 "SwiftUtilities",
+                "SwiftUtilitiesCompilerPlugin",
+                "MacroUtilities",
+                .product(
+                    name: "SwiftSyntaxMacrosTestSupport",
+                    package: "swift-syntax"
+                )
+            ]
+        ),
+        .testTarget(
+            name: "UIUtilitiesTests",
+            dependencies: [
+                "UIUtilities",
                 "SwiftUtilitiesCompilerPlugin",
                 "MacroUtilities",
                 .product(

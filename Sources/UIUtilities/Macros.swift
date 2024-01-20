@@ -23,39 +23,33 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#if canImport(Foundation)
-
-    import Foundation
-
-    /// Create a URL from a string literal without an optional
-    ///
-    /// Use this macro to validate your string literal URL at compile time
-    ///
-    /// ```swift
-    /// let url = #URL("https://www.apple.com")
-    /// ```
-    ///
-    /// Expands to
-    ///
-    /// ```swift
-    /// let url = URL(string: "https://www.apple.com")!
-    /// ```
-    ///
-    /// The forced unwrapping in the expanded code is gauranteed to never fail, because the macro validates the string literal at compile time and produces a diagnostic if the provide string is not a valid URL
-    ///
-    /// - Parameters:
-    ///   - value: A literal string to convert into a `URL`
-    ///   - strict: Whether or not the string should be evaluated strictly
-    /// - Returns: A `URL` based on the provided string literal
-    @freestanding(expression)
-    public macro URL(
-        _ value: String,
-        strict: Bool = true
-    ) -> URL = #externalMacro(module: "SwiftUtilitiesCompilerPlugin", type: "URLMacro")
+#if canImport(SwiftUI)
+    import SwiftUI
 
     @freestanding(expression)
-    public macro MailTo(
-        _ value: String
-    ) -> URL = #externalMacro(module: "SwiftUtilitiesCompilerPlugin", type: "MailToMacro")
+    public macro Color(_ string: String) -> SwiftUI.Color = #externalMacro(module: "SwiftUtilitiesCompilerPlugin", type: "ColorStringMacro")
 
+    @freestanding(expression)
+    public macro Color(_ integer: Int) -> SwiftUI.Color = #externalMacro(module: "SwiftUtilitiesCompilerPlugin", type: "ColorIntegerMacro")
+
+#endif
+
+#if canImport(UIKit)
+    import UIKit
+
+    @freestanding(expression)
+    public macro UIColor(_ string: String) -> UIKit.UIColor = #externalMacro(module: "SwiftUtilitiesCompilerPlugin", type: "UIColorStringMacro")
+
+    @freestanding(expression)
+    public macro UIColor(_ integer: Int) -> UIKit.UIColor = #externalMacro(module: "SwiftUtilitiesCompilerPlugin", type: "UIColorIntegerMacro")
+#endif
+
+#if canImport(AppKit)
+    import AppKit
+
+    @freestanding(expression)
+    public macro NSColor(_ string: String) -> AppKit.NSColor = #externalMacro(module: "SwiftUtilitiesCompilerPlugin", type: "NSColorStringMacro")
+
+    @freestanding(expression)
+    public macro NSColor(_ integer: Int) -> AppKit.NSColor = #externalMacro(module: "SwiftUtilitiesCompilerPlugin", type: "NSColorIntegergMacro")
 #endif
