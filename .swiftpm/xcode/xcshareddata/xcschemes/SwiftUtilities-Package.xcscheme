@@ -48,6 +48,20 @@
                ReferencedContainer = "container:">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "UIUtilities"
+               BuildableName = "UIUtilities"
+               BlueprintName = "UIUtilities"
+               ReferencedContainer = "container:">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -84,6 +98,16 @@
                BlueprintIdentifier = "SwiftUtilitiesCompilerPluginTests"
                BuildableName = "SwiftUtilitiesCompilerPluginTests"
                BlueprintName = "SwiftUtilitiesCompilerPluginTests"
+               ReferencedContainer = "container:">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "UIUtilitiesTests"
+               BuildableName = "UIUtilitiesTests"
+               BlueprintName = "UIUtilitiesTests"
                ReferencedContainer = "container:">
             </BuildableReference>
          </TestableReference>

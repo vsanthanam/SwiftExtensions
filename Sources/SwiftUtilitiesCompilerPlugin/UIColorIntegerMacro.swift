@@ -1,5 +1,5 @@
 // SwiftUtilities
-// SwiftUtilitiesCompilerPlugin.swift
+// UIColorIntegerMacro.swift
 //
 // MIT License
 //
@@ -23,19 +23,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import SwiftCompilerPlugin
 import SwiftSyntaxMacros
 
-@main
-struct SwiftUtilitiesCompilerPlugin: CompilerPlugin {
-    let providingMacros: [Macro.Type] = [
-        URLMacro.self,
-        MailToMacro.self,
-        ColorStringMacro.self,
-        ColorIntegerMacro.self,
-        UIColorStringMacro.self,
-        UIColorIntegerMacro.self,
-        NSColorStringMacro.self,
-        NSColorIntegerMacro.self,
-    ]
+public struct UIColorIntegerMacro: ExpressionMacro, UIKitColorMacro {
+    public static var input: ColorInput { .integer }
 }
