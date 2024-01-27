@@ -26,12 +26,31 @@
 #if canImport(SwiftUI)
     import SwiftUI
 
+    /// Create a SwiftUI Color from a hexidecimal string
+    ///
+    /// Properly formatted string should be prefixed with `#`, and contain exactly 6 or 8 characters
+    ///
+    /// ```swift
+    /// var body: some View {
+    ///     Text("Foo")
+    ///         .foregroundStyle(#Color("#008080"))
+    /// }
+    /// ```
     @freestanding(expression)
     public macro Color(_ string: String) -> SwiftUI.Color = #externalMacro(module: "SwiftUtilitiesCompilerPlugin", type: "ColorStringMacro")
 
+    /// Create a SwiftUI Color from a hexidecimal integer
+    ///
+    /// Properly formatted integers should contain exactly 6 or 8 digits
+    ///
+    /// ```swift
+    /// var body: some View {
+    ///     Text("Foo")
+    ///         .foregroundStyle(#Color(0x008080))
+    /// }
+    /// ```
     @freestanding(expression)
     public macro Color(_ integer: Int) -> SwiftUI.Color = #externalMacro(module: "SwiftUtilitiesCompilerPlugin", type: "ColorIntegerMacro")
-
 #endif
 
 #if canImport(UIKit)
