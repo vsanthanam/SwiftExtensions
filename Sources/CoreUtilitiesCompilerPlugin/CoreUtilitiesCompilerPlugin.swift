@@ -1,5 +1,5 @@
 // SwiftUtilities
-// CastingTests.swift
+// CoreUtilitiesCompilerPlugin.swift
 //
 // MIT License
 //
@@ -23,27 +23,13 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import SwiftUtilities
-import XCTest
+import SwiftCompilerPlugin
+import SwiftSyntaxMacros
 
-final class CastingTests: XCTestCase {
-
-    class MyType {
-        init() {}
-    }
-
-    final class MySubType: MyType {}
-
-    final class MyOtherType {}
-
-    func test_cast_valid() {
-        let instance = MySubType()
-        XCTAssertNoThrow(try cast(instance, to: MyType.self))
-    }
-
-    func test_cast_invalid() {
-        let instance = MyOtherType()
-        XCTAssertThrowsError(try cast(instance, to: MyType.self))
-    }
-
+@main
+struct CoreUtilitiesCompilerPlugin: CompilerPlugin {
+    let providingMacros: [Macro.Type] = [
+        URLMacro.self,
+        MailToMacro.self,
+    ]
 }

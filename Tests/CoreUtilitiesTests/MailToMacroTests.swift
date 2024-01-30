@@ -23,9 +23,9 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+import CoreUtilities
+import CoreUtilitiesCompilerPlugin
 import SwiftSyntaxMacrosTestSupport
-import SwiftUtilities
-import SwiftUtilitiesCompilerPlugin
 import XCTest
 
 final class MailToMacroTests: XCTestCase {

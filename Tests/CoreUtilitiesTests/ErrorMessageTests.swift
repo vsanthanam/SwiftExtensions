@@ -23,7 +23,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import SwiftUtilities
+import CoreUtilities
 import XCTest
 
 final class ErrorMessageTests: XCTestCase {
@@ -32,7 +32,7 @@ final class ErrorMessageTests: XCTestCase {
         let message = ErrorMessage("My custom error message")
         XCTAssertEqual(message.message, "My custom error message")
         XCTAssertEqual(message.errorDescription, "My custom error message")
-        XCTAssertEqual(message.file.description, "SwiftUtilitiesTests/ErrorMessageTests.swift")
+        XCTAssertEqual(message.file.description, "CoreUtilitiesTests/ErrorMessageTests.swift")
         XCTAssertEqual(message.function.description, "test_initializer()")
         XCTAssertEqual(message.line, 32)
         XCTAssertEqual(message.column, 35)
@@ -40,7 +40,7 @@ final class ErrorMessageTests: XCTestCase {
 
     func test_description() {
         let message = ErrorMessage("New message")
-        XCTAssertEqual(message.description, "SwiftUtilitiesTests/ErrorMessageTests.swift:test_description():42:35:New message")
+        XCTAssertEqual(message.description, "CoreUtilitiesTests/ErrorMessageTests.swift:test_description():42:35:New message")
     }
 
     func test_equatable() {

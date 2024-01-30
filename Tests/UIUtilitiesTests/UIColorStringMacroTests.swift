@@ -24,7 +24,7 @@
 // SOFTWARE.
 
 import SwiftSyntaxMacrosTestSupport
-import SwiftUtilitiesCompilerPlugin
+import UIUtilitiesCompilerPlugin
 import XCTest
 
 final class UIColorStringMacroTests: XCTestCase {
