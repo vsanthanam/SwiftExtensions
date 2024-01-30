@@ -1,5 +1,5 @@
 // SwiftUtilities
-// SwiftUtilitiesCompilerPlugin.swift
+// CastingTests.swift
 //
 // MIT License
 //
@@ -23,19 +23,27 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import SwiftCompilerPlugin
-import SwiftSyntaxMacros
+import CoreUtilities
+import XCTest
 
-@main
-struct SwiftUtilitiesCompilerPlugin: CompilerPlugin {
-    let providingMacros: [Macro.Type] = [
-        URLMacro.self,
-        MailToMacro.self,
-        ColorStringMacro.self,
-        ColorIntegerMacro.self,
-        UIColorStringMacro.self,
-        UIColorIntegerMacro.self,
-        NSColorStringMacro.self,
-        NSColorIntegerMacro.self,
-    ]
+final class CastingTests: XCTestCase {
+
+    class MyType {
+        init() {}
+    }
+
+    final class MySubType: MyType {}
+
+    final class MyOtherType {}
+
+    func test_cast_valid() {
+        let instance = MySubType()
+        XCTAssertNoThrow(try cast(instance, to: MyType.self))
+    }
+
+    func test_cast_invalid() {
+        let instance = MyOtherType()
+        XCTAssertThrowsError(try cast(instance, to: MyType.self))
+    }
+
 }

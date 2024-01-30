@@ -27,7 +27,7 @@ import SwiftUI
 
 public extension View {
 
-    /// Presents a sheet using the given item as a data source
+    /// Presents a sheet using the given item as a data source, usin a key path to differentiate bewteen different stable instances of the data source.
     /// for the sheet's content.
     ///
     /// Use this method when you need to present a modal view with content
@@ -113,6 +113,8 @@ public extension View {
 
 struct SheetItemKeyPathViewModifier<Item, ID: Hashable, SheetContent: View>: ViewModifier {
 
+    // MARK: - API
+
     @Binding
     var item: Item?
 
@@ -122,6 +124,8 @@ struct SheetItemKeyPathViewModifier<Item, ID: Hashable, SheetContent: View>: Vie
 
     @ViewBuilder
     let content: (Item) -> SheetContent
+
+    // MARK: - ViewModifier
 
     @MainActor
     @ViewBuilder

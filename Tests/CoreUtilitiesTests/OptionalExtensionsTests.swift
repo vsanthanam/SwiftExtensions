@@ -1,5 +1,5 @@
 // SwiftUtilities
-// CollectionExtensionsTests.swift
+// OptionalExtensionsTests.swift
 //
 // MIT License
 //
@@ -23,23 +23,29 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import SwiftUtilities
+import CoreUtilities
 import XCTest
 
-final class CollectionExtensionsTests: XCTestCase {
+final class OptionalExtensionsTests: XCTestCase {
 
-    func test_sorted() {
-        let scores = [Score(value: 12), Score(value: 1), Score(value: 19)]
-        XCTAssertEqual(scores.sorted(by: \.value).map(\.value), [1, 12, 19])
+    func test_exists_true() {
+        let value: Bool? = false
+        XCTAssertTrue(value.exists)
     }
 
-    func test_sorted_reverse() {
-        let scores = [Score(value: 12), Score(value: 1), Score(value: 19)]
-        XCTAssertEqual(scores.sorted(by: \.value, order: .reverse).map(\.value), [19, 12, 1])
+    func test_exists_false() {
+        let value: Bool? = nil
+        XCTAssertFalse(value.exists)
     }
 
-    struct Score {
-        let value: Int
+    func test_mustExist_throws() {
+        let val: Bool? = nil
+        XCTAssertThrowsError(try val.mustExist("Some error"))
+    }
+
+    func test_mustExist_doesnt_throws() {
+        let val: Bool? = false
+        XCTAssertNoThrow(try val.mustExist("Some error"))
     }
 
 }
