@@ -51,11 +51,11 @@
     public macro URL(
         _ value: String,
         strict: Bool = true
-    ) -> URL = #externalMacro(module: "SwiftUtilitiesCompilerPlugin", type: "URLMacro")
+    ) -> URL = #externalMacro(module: "CoreUtilitiesCompilerPlugin", type: "URLMacro")
 
     @freestanding(expression)
     public macro MailTo(
         _ value: String
-    ) -> URL = #externalMacro(module: "SwiftUtilitiesCompilerPlugin", type: "MailToMacro")
+    ) -> URL = #externalMacro(module: "CoreUtilitiesCompilerPlugin", type: "MailToMacro")
 
 #endif

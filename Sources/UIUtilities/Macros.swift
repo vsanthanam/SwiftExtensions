@@ -37,7 +37,7 @@
     /// }
     /// ```
     @freestanding(expression)
-    public macro Color(_ string: String) -> SwiftUI.Color = #externalMacro(module: "SwiftUtilitiesCompilerPlugin", type: "ColorStringMacro")
+    public macro Color(_ string: String) -> SwiftUI.Color = #externalMacro(module: "UIUtilitiesCompilerPlugin", type: "ColorStringMacro")
 
     /// Create a SwiftUI Color from a hexidecimal integer
     ///
@@ -50,25 +50,25 @@
     /// }
     /// ```
     @freestanding(expression)
-    public macro Color(_ integer: Int) -> SwiftUI.Color = #externalMacro(module: "SwiftUtilitiesCompilerPlugin", type: "ColorIntegerMacro")
+    public macro Color(_ integer: Int) -> SwiftUI.Color = #externalMacro(module: "UIUtilitiesCompilerPlugin", type: "ColorIntegerMacro")
 #endif
 
 #if canImport(UIKit)
     import UIKit
 
     @freestanding(expression)
-    public macro UIColor(_ string: String) -> UIKit.UIColor = #externalMacro(module: "SwiftUtilitiesCompilerPlugin", type: "UIColorStringMacro")
+    public macro UIColor(_ string: String) -> UIKit.UIColor = #externalMacro(module: "UIUtilitiesCompilerPlugin", type: "UIColorStringMacro")
 
     @freestanding(expression)
-    public macro UIColor(_ integer: Int) -> UIKit.UIColor = #externalMacro(module: "SwiftUtilitiesCompilerPlugin", type: "UIColorIntegerMacro")
+    public macro UIColor(_ integer: Int) -> UIKit.UIColor = #externalMacro(module: "UIUtilitiesCompilerPlugin", type: "UIColorIntegerMacro")
 #endif
 
 #if canImport(AppKit)
     import AppKit
 
     @freestanding(expression)
-    public macro NSColor(_ string: String) -> AppKit.NSColor = #externalMacro(module: "SwiftUtilitiesCompilerPlugin", type: "NSColorStringMacro")
+    public macro NSColor(_ string: String) -> AppKit.NSColor = #externalMacro(module: "UIUtilitiesCompilerPlugin", type: "NSColorStringMacro")
 
     @freestanding(expression)
-    public macro NSColor(_ integer: Int) -> AppKit.NSColor = #externalMacro(module: "SwiftUtilitiesCompilerPlugin", type: "NSColorIntegergMacro")
+    public macro NSColor(_ integer: Int) -> AppKit.NSColor = #externalMacro(module: "UIUtilitiesCompilerPlugin", type: "NSColorIntegergMacro")
 #endif
