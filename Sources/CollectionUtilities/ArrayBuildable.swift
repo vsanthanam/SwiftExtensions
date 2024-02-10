@@ -1,5 +1,5 @@
 // SwiftUtilities
-// BundleExtensions.swift
+// ArrayBuildable.swift
 //
 // MIT License
 //
@@ -23,20 +23,13 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#if canImport(Foundation)
+public protocol ArrayBuildable<Element> {
+    associatedtype Element
+    init(declaratively: [Element])
+}
 
-    import Foundation
-
-    public extension Bundle {
-
-        var shortVersion: String? {
-            try? cast(Bundle.main.infoDictionary?["CFBundleShortVersionString"], to: String.self)
-        }
-
-        var version: String? {
-            try? cast(Bundle.main.infoDictionary?["CFBundleVersion"], to: String.self)
-        }
-
+extension Array: ArrayBuildable {
+    public init(declaratively: [Element]) {
+        self = declaratively
     }
-
-#endif
+}

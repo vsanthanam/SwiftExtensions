@@ -1,5 +1,5 @@
 // SwiftUtilities
-// CollectionBuilder.swift
+// ArrayBuilder.swift
 //
 // MIT License
 //
@@ -30,8 +30,8 @@ public enum ArrayBuilder<Product: ArrayBuildable> {
         [expression]
     }
 
-    public static func buildExpression(_ expression: [Product.Element]) -> [Product.Element] {
-        expression
+    public static func buildExpression(_ expression: some Sequence<Product.Element>) -> [Product.Element] {
+        .init(expression)
     }
 
     public static func buildExpression(_ expression: Void) -> [Product.Element] {
@@ -70,19 +70,8 @@ public enum ArrayBuilder<Product: ArrayBuildable> {
         component
     }
 
-    public static func buildFinalResult<T: ArrayBuildable<Product.Element>>(_ component: [Product.Element]) -> T {
-        T(declaratively: component)
+    public static func buildFinalResult(_ component: [Product.Element]) -> Product {
+        Product(declaratively: component)
     }
 
-}
-
-public protocol ArrayBuildable<Element> {
-    associatedtype Element
-    init(declaratively: [Element])
-}
-
-extension Array: ArrayBuildable {
-    public init(declaratively: [Element]) {
-        self = declaratively
-    }
 }

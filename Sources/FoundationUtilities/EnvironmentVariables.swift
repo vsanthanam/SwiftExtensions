@@ -1,5 +1,5 @@
 // SwiftUtilities
-// CoreUtilitiesCompilerPlugin.swift
+// EnvironmentVariables.swift
 //
 // MIT License
 //
@@ -23,13 +23,31 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import SwiftCompilerPlugin
-import SwiftSyntaxMacros
+import Foundation
 
-@main
-struct CoreUtilitiesCompilerPlugin: CompilerPlugin {
-    let providingMacros: [Macro.Type] = [
-        URLMacro.self,
-        MailToMacro.self,
-    ]
+/// A utility to access variable values from the process environment
+public enum EnvironmentVariables {
+
+    /// Retrieve a variable value from the process environment
+    /// - Parameter key: The key
+    /// - Returns: The value for the provided key, or `nil` of no such value exists
+    public static func value(forKey key: String) -> String? {
+        ProcessInfo.processInfo.environment[key]
+    }
+
+    public static subscript(_ key: String, default defaultValue: String) -> String {
+        ProcessInfo.processInfo.environment[key, default: defaultValue]
+    }
+
+    /// Retrieve a variable value from the process environment
+    ///
+    /// ```swift
+    /// let timeout = EnvironmentVariables["TIMEOUT_VALUE"]
+    /// ```
+    /// - Parameter key: The key
+    /// - Returns: The value for the provided key, or `nil` of no such value exists
+    public static subscript(_ key: String) -> String? {
+        ProcessInfo.processInfo.environment[key]
+    }
+
 }
