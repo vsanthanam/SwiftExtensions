@@ -1,5 +1,5 @@
 // SwiftUtilities
-// CollectionBuildable.swift
+// FoundationUtilitiesCompilerPlugin.swift
 //
 // MIT License
 //
@@ -23,40 +23,14 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-public protocol BuildableCollection<Element>: Collection {
-    init(_ element: Element)
-    init()
-    func build(_ next: Self) -> Self
-}
+import SwiftCompilerPlugin
+import SwiftSyntaxMacros
 
-extension Array: BuildableCollection {
-    public init(_ element: Element) {
-        self = []
-    }
-
-    public func build(_ next: [Element]) -> [Element] {
-        self + next
-    }
-}
-
-extension Set: BuildableCollection {
-    public init(_ element: Element) {
-        self.init([element])
-    }
-
-    public func build(_ next: Set<Element>) -> Set<Element> {
-        union(next)
-    }
-}
-
-extension Dictionary: BuildableCollection {
-    public init(_ element: (key: Key, value: Value)) {
-        var new = [Key: Value]()
-        new[element.key] = element.value
-        self = new
-    }
-
-    public func build(_ next: [Key: Value]) -> [Key: Value] {
-        merging(next, uniquingKeysWith: { lhs, rhs in rhs })
-    }
+@main
+struct FoundationUtilitiesCompilerPlugin: CompilerPlugin {
+    let providingMacros: [Macro.Type] = [
+        URLMacro.self,
+        MailToMacro.self,
+        EmailMacro.self
+    ]
 }

@@ -23,8 +23,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import CoreUtilities
-import CoreUtilitiesCompilerPlugin
+import FoundationUtilities
+import FoundationUtilitiesCompilerPlugin
 import SwiftSyntaxMacrosTestSupport
 import XCTest
 

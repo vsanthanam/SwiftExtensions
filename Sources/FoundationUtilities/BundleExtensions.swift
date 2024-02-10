@@ -1,5 +1,5 @@
 // SwiftUtilities
-// MailToMacroTests.swift
+// BundleExtensions.swift
 //
 // MIT License
 //
@@ -24,27 +24,16 @@
 // SOFTWARE.
 
 import CoreUtilities
-import CoreUtilitiesCompilerPlugin
-import SwiftSyntaxMacrosTestSupport
-import XCTest
+import Foundation
 
-final class MailToMacroTests: XCTestCase {
+public extension Bundle {
 
-    func test_mailto_macro_expansion() {
+    var shortVersion: String? {
+        try? cast(Bundle.main.infoDictionary?["CFBundleShortVersionString"], to: String.self)
+    }
 
-        assertMacroExpansion(
-            """
-            let x = #MailTo("talkto@vsanthanam.com")
-            """,
-            expandedSource:
-            """
-            let x = URL(string: "mailto:talkto@vsanthanam.com")!
-            """,
-            macros: [
-                "MailTo": MailToMacro.self
-            ]
-        )
-
+    var version: String? {
+        try? cast(Bundle.main.infoDictionary?["CFBundleVersion"], to: String.self)
     }
 
 }

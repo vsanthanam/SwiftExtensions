@@ -25,6 +25,13 @@
 
 @_exported import CollectionUtilities
 @_exported import CoreUtilities
-@_exported import UIUtilities
+
+#if canImport(SwiftUI) || canImport(AppKit) || canImport(UIKit)
+    @_exported import UIUtilities
+#endif
+
+#if canImport(Foundation)
+    @_exported import FoundationUtilities
+#endif
 
 struct SwiftUtilitiesHolder {}
