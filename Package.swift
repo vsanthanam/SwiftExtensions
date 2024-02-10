@@ -5,7 +5,7 @@ import CompilerPluginSupport
 import PackageDescription
 
 let package = Package(
-    name: "SwiftUtilities",
+    name: "SwiftExtensions",
     platforms: [
         .iOS(.v15),
         .macOS(.v12),
@@ -15,39 +15,39 @@ let package = Package(
     ],
     products: [
         .library(
-            name: "SwiftUtilities",
+            name: "SwiftExtensions",
             targets: [
-                "SwiftUtilities"
+                "SwiftExtensions"
             ]
         ),
         .library(
-            name: "CoreUtilities",
+            name: "CoreExtensions",
             targets: [
-                "CoreUtilities"
+                "CoreExtensions"
             ]
         ),
         .library(
-            name: "MacroUtilities",
+            name: "MacroExtensions",
             targets: [
-                "MacroUtilities"
+                "MacroExtensions"
             ]
         ),
         .library(
-            name: "UIUtilities",
+            name: "UIExtensions",
             targets: [
-                "UIUtilities"
+                "UIExtensions"
             ]
         ),
         .library(
-            name: "CollectionUtilities",
+            name: "CollectionExtensions",
             targets: [
-                "CollectionUtilities"
+                "CollectionExtensions"
             ]
         ),
         .library(
-            name: "FoundationUtilities",
+            name: "FoundationExtensions",
             targets: [
-                "FoundationUtilities"
+                "FoundationExtensions"
             ]
         )
     ],
@@ -63,19 +63,19 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "SwiftUtilities",
+            name: "SwiftExtensions",
             dependencies: [
-                "CoreUtilities",
-                "UIUtilities",
-                "FoundationUtilities",
-                "CollectionUtilities"
+                "CoreExtensions",
+                "UIExtensions",
+                "FoundationExtensions",
+                "CollectionExtensions"
             ]
         ),
         .target(
-            name: "CoreUtilities"
+            name: "CoreExtensions"
         ),
         .target(
-            name: "MacroUtilities",
+            name: "MacroExtensions",
             dependencies: [
                 .product(
                     name: "SwiftSyntaxMacros",
@@ -88,23 +88,23 @@ let package = Package(
             ]
         ),
         .target(
-            name: "UIUtilities",
+            name: "UIExtensions",
             dependencies: [
-                "UIUtilitiesCompilerPlugin"
+                "UIExtensionsCompilerPlugin"
             ]
         ),
         .target(
-            name: "CollectionUtilities"
+            name: "CollectionExtensions"
         ),
         .target(
-            name: "FoundationUtilities",
+            name: "FoundationExtensions",
             dependencies: [
-                "CoreUtilities",
-                "FoundationUtilitiesCompilerPlugin"
+                "CoreExtensions",
+                "FoundationExtensionsCompilerPlugin"
             ]
         ),
         .macro(
-            name: "UIUtilitiesCompilerPlugin",
+            name: "UIExtensionsCompilerPlugin",
             dependencies: [
                 .product(
                     name: "SwiftSyntaxMacros",
@@ -114,11 +114,11 @@ let package = Package(
                     name: "SwiftCompilerPlugin",
                     package: "swift-syntax"
                 ),
-                "MacroUtilities",
+                "MacroExtensions",
             ]
         ),
         .macro(
-            name: "FoundationUtilitiesCompilerPlugin",
+            name: "FoundationExtensionsCompilerPlugin",
             dependencies: [
                 .product(
                     name: "SwiftSyntaxMacros",
@@ -128,21 +128,21 @@ let package = Package(
                     name: "SwiftCompilerPlugin",
                     package: "swift-syntax"
                 ),
-                "MacroUtilities",
+                "MacroExtensions",
             ]
         ),
         .testTarget(
-            name: "CoreUtilitiesTests",
+            name: "CoreExtensionsTests",
             dependencies: [
-                "CoreUtilities"
+                "CoreExtensions"
             ]
         ),
         .testTarget(
-            name: "UIUtilitiesTests",
+            name: "UIExtensionsTests",
             dependencies: [
-                "UIUtilities",
-                "UIUtilitiesCompilerPlugin",
-                "MacroUtilities",
+                "UIExtensions",
+                "UIExtensionsCompilerPlugin",
+                "MacroExtensions",
                 .product(
                     name: "SwiftSyntaxMacrosTestSupport",
                     package: "swift-syntax"
@@ -150,9 +150,9 @@ let package = Package(
             ]
         ),
         .testTarget(
-            name: "MacroUtilitiesTests",
+            name: "MacroExtensionsTests",
             dependencies: [
-                "MacroUtilities",
+                "MacroExtensions",
                 .product(
                     name: "SwiftDiagnostics",
                     package: "swift-syntax"
@@ -160,17 +160,17 @@ let package = Package(
             ]
         ),
         .testTarget(
-            name: "CollectionUtilitiesTests",
+            name: "CollectionExtensionsTests",
             dependencies: [
-                "CollectionUtilities"
+                "CollectionExtensions"
             ]
         ),
         .testTarget(
-            name: "FoundationUtilitiesTests",
+            name: "FoundationExtensionsTests",
             dependencies: [
-                "FoundationUtilities",
-                "FoundationUtilitiesCompilerPlugin",
-                "MacroUtilities",
+                "FoundationExtensions",
+                "FoundationExtensionsCompilerPlugin",
+                "MacroExtensions",
                 .product(
                     name: "SwiftSyntaxMacrosTestSupport",
                     package: "swift-syntax"
