@@ -62,6 +62,20 @@
                ReferencedContainer = "container:">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "CoreUtilities"
+               BuildableName = "CoreUtilities"
+               BlueprintName = "CoreUtilities"
+               ReferencedContainer = "container:">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -118,6 +132,36 @@
                BlueprintIdentifier = "CoreUtilitiesTests"
                BuildableName = "CoreUtilitiesTests"
                BlueprintName = "CoreUtilitiesTests"
+               ReferencedContainer = "container:">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "CollectionBuildersTests"
+               BuildableName = "CollectionBuildersTests"
+               BlueprintName = "CollectionBuildersTests"
+               ReferencedContainer = "container:">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "CollectionBuilderTests"
+               BuildableName = "CollectionBuilderTests"
+               BlueprintName = "CollectionBuilderTests"
+               ReferencedContainer = "container:">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "CollectionUtilitiesTests"
+               BuildableName = "CollectionUtilitiesTests"
+               BlueprintName = "CollectionUtilitiesTests"
                ReferencedContainer = "container:">
             </BuildableReference>
          </TestableReference>

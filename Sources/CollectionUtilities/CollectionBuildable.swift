@@ -1,5 +1,5 @@
 // SwiftUtilities
-// CollectionExtensionsTests.swift
+// CollectionBuildable.swift
 //
 // MIT License
 //
@@ -23,23 +23,40 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import CoreUtilities
-import XCTest
+public protocol BuildableCollection<Element>: Collection {
+    init(_ element: Element)
+    init()
+    func build(_ next: Self) -> Self
+}
 
-final class CollectionExtensionsTests: XCTestCase {
-
-    func test_sorted() {
-        let scores = [Score(value: 12), Score(value: 1), Score(value: 19)]
-        XCTAssertEqual(scores.sorted(by: \.value).map(\.value), [1, 12, 19])
+extension Array: BuildableCollection {
+    public init(_ element: Element) {
+        self = []
     }
 
-    func test_sorted_reverse() {
-        let scores = [Score(value: 12), Score(value: 1), Score(value: 19)]
-        XCTAssertEqual(scores.sorted(by: \.value, order: .reverse).map(\.value), [19, 12, 1])
+    public func build(_ next: [Element]) -> [Element] {
+        self + next
+    }
+}
+
+extension Set: BuildableCollection {
+    public init(_ element: Element) {
+        self.init([element])
     }
 
-    struct Score {
-        let value: Int
+    public func build(_ next: Set<Element>) -> Set<Element> {
+        union(next)
+    }
+}
+
+extension Dictionary: BuildableCollection {
+    public init(_ element: (key: Key, value: Value)) {
+        var new = [Key: Value]()
+        new[element.key] = element.value
+        self = new
     }
 
+    public func build(_ next: [Key: Value]) -> [Key: Value] {
+        merging(next, uniquingKeysWith: { lhs, rhs in rhs })
+    }
 }

@@ -1,5 +1,5 @@
 // SwiftUtilities
-// SwiftUtilitiesHolder.swift
+// CollectionExtensionsTests.swift
 //
 // MIT License
 //
@@ -23,8 +23,23 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-@_exported import CollectionUtilities
-@_exported import CoreUtilities
-@_exported import UIUtilities
+import CollectionUtilities
+import XCTest
 
-struct SwiftUtilitiesHolder {}
+final class CollectionExtensionsTests: XCTestCase {
+
+    func test_sorted() {
+        let scores = [Score(value: 12), Score(value: 1), Score(value: 19)]
+        XCTAssertEqual(scores.sorted(by: \.value).map(\.value), [1, 12, 19])
+    }
+
+    func test_sorted_reverse() {
+        let scores = [Score(value: 12), Score(value: 1), Score(value: 19)]
+        XCTAssertEqual(scores.sorted(by: \.value, order: .reverse).map(\.value), [19, 12, 1])
+    }
+
+    struct Score {
+        let value: Int
+    }
+
+}

@@ -1,5 +1,5 @@
 // SwiftUtilities
-// SwiftUtilitiesHolder.swift
+// ArrayBuilderTests.swift
 //
 // MIT License
 //
@@ -23,8 +23,41 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-@_exported import CollectionUtilities
-@_exported import CoreUtilities
-@_exported import UIUtilities
+import CollectionUtilities
+import XCTest
 
-struct SwiftUtilitiesHolder {}
+final class ArrayBuilderTests: XCTestCase {
+
+    let o = true
+    let list = [4, 5, 6]
+    let cool: String? = nil
+    let notCool: String? = "bar"
+
+    @ArrayBuilder<[Int]>
+    var testArray: [Int] {
+        1
+        2
+        3
+        list
+        for item in list {
+            item + 1
+        }
+        if o {
+            10
+        } else {
+            11
+        }
+        if let cool {
+            cool.count
+        }
+        if let notCool {
+            notCool.count
+        }
+    }
+
+    func test_array_builder() {
+        let expected = [1, 2, 3, 4, 5, 6, 5, 6, 7, 10, 3]
+        XCTAssertEqual(testArray, expected)
+    }
+
+}

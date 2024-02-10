@@ -37,6 +37,10 @@ let package = Package(
             targets: [
                 "UIUtilities"
             ]
+        ),
+        .library(
+            name: "CollectionUtilities",
+            targets: ["CollectionUtilities"]
         )
     ],
     dependencies: [
@@ -81,6 +85,9 @@ let package = Package(
             dependencies: [
                 "UIUtilitiesCompilerPlugin"
             ]
+        ),
+        .target(
+            name: "CollectionUtilities"
         ),
         .macro(
             name: "CoreUtilitiesCompilerPlugin",
@@ -142,6 +149,12 @@ let package = Package(
                     name: "SwiftDiagnostics",
                     package: "swift-syntax"
                 )
+            ]
+        ),
+        .testTarget(
+            name: "CollectionUtilitiesTests",
+            dependencies: [
+                "CollectionUtilities"
             ]
         )
     ]
