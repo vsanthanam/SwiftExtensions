@@ -1,5 +1,5 @@
 // SwiftExtensions
-// StringExtensions.swift
+// UserDefaultExtensions.swift
 //
 // MIT License
 //
@@ -23,26 +23,29 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-public extension String {
+import CoreExtensions
+import Foundation
 
-    /// Create an optional string, and replace empty strings with `nil`
-    var nilIfEmpty: String? {
-        guard self != "" else {
+public extension UserDefaults {
+
+    func codable<T>(
+        forKey defaultName: String,
+        _ type: T.Type = T.self
+    ) throws -> T? where T: Decodable {
+        guard let data = data(forKey: defaultName) else {
             return nil
         }
-        return self
+        let decoder = JSONDecoder()
+        return try decoder.decode(type, from: data)
     }
 
-    /// An empty string
-    static let empty: String = ""
-
-    /// A string containing a single space
-    static let space: String = " "
-
-    /// A string containing a single period
-    static let dot: String = "."
-
-    /// A string containing a single new line
-    static let newLine: String = "\n"
+    func set(
+        _ codable: some Encodable,
+        forKey defaultName: String
+    ) throws {
+        let encoder = JSONEncoder()
+        let data = try encoder.encode(codable)
+        setValue(data, forKey: defaultName)
+    }
 
 }

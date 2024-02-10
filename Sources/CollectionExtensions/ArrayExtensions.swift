@@ -31,6 +31,16 @@
 
 public extension Array {
 
+    /// Create an array by repeatedly executing the provided closure until it returns `nil` or throws an error
+    /// - Parameter unfolding: The closure to unfold
+    init(unfolding: () throws -> Element?) rethrows {
+        var array = [Element]()
+        while let element = try unfolding() {
+            array.append(element)
+        }
+        self = array
+    }
+
     /// Safely subscript an array, returning an optional value if the provided index is out of bounds.
     /// - Parameter index: The index in the array to look up
     /// - Returns: The value at the provided index, or `nil` if the provided index is out of bounds
