@@ -68,3 +68,14 @@
     }
 
 #endif
+
+import CoreExtensions
+
+public extension Collection {
+
+    /// Returns `true` if collection contains any values, otherwise returns `false`
+    var isNotEmpty: Bool {
+        isEmpty.toggled
+    }
+
+}

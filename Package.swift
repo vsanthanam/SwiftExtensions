@@ -94,7 +94,10 @@ let package = Package(
             ]
         ),
         .target(
-            name: "CollectionExtensions"
+            name: "CollectionExtensions",
+            dependencies: [
+                "CoreExtensions"
+            ]
         ),
         .target(
             name: "FoundationExtensions",

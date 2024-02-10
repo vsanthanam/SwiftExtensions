@@ -1,5 +1,5 @@
 // SwiftExtensions
-// StringExtensions.swift
+// BoolExtensions.swift
 //
 // MIT License
 //
@@ -23,26 +23,10 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-public extension String {
+public extension Bool {
 
-    /// Create an optional string, and replace empty strings with `nil`
-    var nilIfEmpty: String? {
-        guard self != "" else {
-            return nil
-        }
-        return self
+    var toggled: Bool {
+        !self
     }
-
-    /// An empty string
-    static let empty: String = ""
-
-    /// A string containing a single space
-    static let space: String = " "
-
-    /// A string containing a single period
-    static let dot: String = "."
-
-    /// A string containing a single new line
-    static let newLine: String = "\n"
 
 }
