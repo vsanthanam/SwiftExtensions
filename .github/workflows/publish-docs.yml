@@ -1,4 +1,4 @@
-name: Unit Tests (iOS)
+name: Publish Documentation
 
 on:
   push:
@@ -10,9 +10,9 @@ jobs:
     runs-on: macos-13
 
     steps:
-    - uses: actions/checkout@v3
     - uses: sersoft-gmbh/swifty-docs-action@v3
       with:
+        use-xcodebuild: true
         output: docs
 
 
