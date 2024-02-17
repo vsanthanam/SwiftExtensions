@@ -29,8 +29,6 @@ import SwiftSyntaxMacros
 @main
 struct FoundationExtensionsCompilerPlugin: CompilerPlugin {
     let providingMacros: [Macro.Type] = [
-        URLMacro.self,
-        MailToMacro.self,
-        EmailMacro.self
+        URLMacro.self
     ]
 }

@@ -50,13 +50,3 @@ public macro URL(
     _ value: String,
     strict: Bool = true
 ) -> URL = #externalMacro(module: "FoundationExtensionsCompilerPlugin", type: "URLMacro")
-
-@freestanding(expression)
-public macro MailTo(
-    _ value: String
-) -> URL = #externalMacro(module: "FoundationExtensionsCompilerPlugin", type: "MailToMacro")
-
-@freestanding(expression)
-public macro Email(
-    _ value: String
-) -> String = #externalMacro(module: "FoundationExtensionsCompilerPlugin", type: "EmailMacro")
