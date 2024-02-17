@@ -1,5 +1,5 @@
 // SwiftExtensions
-// Macros.swift
+// URLMacro.swift
 //
 // MIT License
 //
@@ -50,3 +50,16 @@ public macro URL(
     _ value: String,
     strict: Bool = true
 ) -> URL = #externalMacro(module: "FoundationExtensionsCompilerPlugin", type: "URLMacro")
+
+/// Validate a string to ensure it is a legal URL
+///
+/// The macro makes no alterations to the provided string, but will produce a compile time error of the provided string isn't a legal URL
+///
+/// ```swift
+/// let str1 = #URLString("https://www.apple.com") // will compile
+/// let str2 = #URLString("p1i3ngp2io4unvp2inrg") // will not compile
+/// ```
+@freestanding(expression)
+public macro URLString(
+    _ value: String
+) -> String = #externalMacro(module: "FoundationExtensionsCompilerPlugin", type: "URLStringMacro")

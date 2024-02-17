@@ -29,6 +29,7 @@ import SwiftSyntaxMacros
 @main
 struct FoundationExtensionsCompilerPlugin: CompilerPlugin {
     let providingMacros: [Macro.Type] = [
-        URLMacro.self
+        URLMacro.self,
+        URLStringMacro.self
     ]
 }
