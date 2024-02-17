@@ -12,7 +12,7 @@ jobs:
     steps:
     - uses: sersoft-gmbh/swifty-docs-action@v3
       with:
-        use-xcodebuild: true
         output: docs
+        xcodebuild-scheme: CoreExtensions
 
 
