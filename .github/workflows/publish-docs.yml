@@ -1,18 +1,26 @@
 name: Publish Documentation
 
 on:
+  release:
+    types:
+      - published
+      - edited
   push:
-    branches: [ "main" ]
+    branches: [ main ]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
-  build:
-
-    runs-on: macos-13
-
-    steps:
-    - uses: sersoft-gmbh/swifty-docs-action@v3
-      with:
-        output: docs
-        xcodebuild-scheme: CoreExtensions
-
-
+  generate-and-publish-docs:
+    uses: sersoft-gmbh/oss-common-actions/.github/workflows/swift-generate-and-publish-docs.yml@main
+    with:
+      os: iOS
+      swift-version: '5.9'
+      organisation: ${{ github.repository_owner }}
+      repository: ${{ github.event.repository.name }}
+      pages-branch: gh-pages
