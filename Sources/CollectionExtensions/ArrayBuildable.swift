@@ -23,13 +23,21 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-public protocol ArrayBuildable<Element> {
-    associatedtype Element
-    init(declaratively: [Element])
+/// A protocol that types which can be built using the ``ArrayBuilder`` DSL must conform to
+///
+/// If a type conforms to this protocol, it can be built using the @ArrayBuilder result builder.
+public protocol ArrayBuildable<ArrayElement> {
+
+    /// The element of the array used to build the type
+    associatedtype ArrayElement
+
+    /// Create an instance of the type using a declaratively built array
+    /// - Parameter array: The array used to build type
+    init(declaratively array: [ArrayElement])
 }
 
 extension Array: ArrayBuildable {
-    public init(declaratively: [Element]) {
-        self = declaratively
+    public init(declaratively array: [Element]) {
+        self = array
     }
 }

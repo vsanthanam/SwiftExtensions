@@ -23,54 +23,89 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+/// A result builder used to create arrays, as well as other types that can be represented by an array.
+///
+/// You can use this result builder to build any array, as well as any other type that conforms to `ArrayBuildable`
+///
+/// ```swift
+/// @ArrayBuilder<[Int]>
+/// func declarativeArray() -> [Int] {
+///     1
+///     2
+///     3
+///     someIntegerSequence
+///     if foo {
+///         4
+///     } else {
+///         5
+///     }
+///     for value in someIntegerSequence {
+///         value + 1
+///     }
+/// }
+/// ```
+///
+/// The result builder will acumulate all the values produced by each expression into a single array, and ultimately use that array to initialize an instance of the type used to specialize `ArrayBuilder`, in thise case `[Int]`.
 @resultBuilder
 public enum ArrayBuilder<Product: ArrayBuildable> {
 
-    public static func buildExpression(_ expression: Product.Element) -> [Product.Element] {
+    /// Do not call this method. It is an implementation detail of the @ArrayBuilder result builder.
+    public static func buildExpression(_ expression: Product.ArrayElement) -> [Product.ArrayElement] {
         [expression]
     }
 
-    public static func buildExpression(_ expression: some Sequence<Product.Element>) -> [Product.Element] {
+    /// Do not call this method. It is an implementation detail of the @ArrayBuilder result builder.
+    public static func buildExpression(_ expression: some Sequence<Product.ArrayElement>) -> [Product.ArrayElement] {
         .init(expression)
     }
 
-    public static func buildExpression(_ expression: Void) -> [Product.Element] {
+    /// Do not call this method. It is an implementation detail of the @ArrayBuilder result builder.
+    public static func buildExpression(_ expression: Void) -> [Product.ArrayElement] {
         .init()
     }
 
-    public static func buildBlock(_ components: [Product.Element]...) -> [Product.Element] {
+    /// Do not call this method. It is an implementation detail of the @ArrayBuilder result builder.
+    public static func buildBlock(_ components: [Product.ArrayElement]...) -> [Product.ArrayElement] {
         components.flatMap { $0 }
     }
 
-    public static func buildPartialBlock(first: [Product.Element]) -> [Product.Element] {
+    /// Do not call this method. It is an implementation detail of the @ArrayBuilder result builder.
+    public static func buildPartialBlock(first: [Product.ArrayElement]) -> [Product.ArrayElement] {
         first
     }
 
-    public static func buildPartialBlock(accumulated: [Product.Element], next: [Product.Element]) -> [Product.Element] {
+    /// Do not call this method. It is an implementation detail of the @ArrayBuilder result builder.
+    public static func buildPartialBlock(accumulated: [Product.ArrayElement], next: [Product.ArrayElement]) -> [Product.ArrayElement] {
         accumulated + next
     }
 
-    public static func buildEither(first component: [Product.Element]) -> [Product.Element] {
+    /// Do not call this method. It is an implementation detail of the @ArrayBuilder result builder.
+    public static func buildEither(first component: [Product.ArrayElement]) -> [Product.ArrayElement] {
         component
     }
 
-    public static func buildEither(second component: [Product.Element]) -> [Product.Element] {
+    /// Do not call this method. It is an implementation detail of the @ArrayBuilder result builder.
+    public static func buildEither(second component: [Product.ArrayElement]) -> [Product.ArrayElement] {
         component
     }
 
-    public static func buildOptional(_ component: [Product.Element]?) -> [Product.Element] {
+    /// Do not call this method. It is an implementation detail of the @ArrayBuilder result builder.
+    public static func buildOptional(_ component: [Product.ArrayElement]?) -> [Product.ArrayElement] {
         component ?? .init()
     }
 
-    public static func buildArray(_ components: [[Product.Element]]) -> [Product.Element] {
+    /// Do not call this method. It is an implementation detail of the @ArrayBuilder result builder.
+    public static func buildArray(_ components: [[Product.ArrayElement]]) -> [Product.ArrayElement] {
         components.flatMap { $0 }
     }
 
-    public static func buildLimitedAvailability(_ component: [Product.Element]) -> [Product.Element] {
+    /// Do not call this method. It is an implementation detail of the @ArrayBuilder result builder.
+    public static func buildLimitedAvailability(_ component: [Product.ArrayElement]) -> [Product.ArrayElement] {
         component
     }
 
-    public static func buildFinalResult(_ component: [Product.Element]) -> Product {
+    /// Do not call this method. It is an implementation detail of the @ArrayBuilder result builder.
+    public static func buildFinalResult(_ component: [Product.ArrayElement]) -> Product {
         Product(declaratively: component)
     }
 

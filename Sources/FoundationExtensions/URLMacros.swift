@@ -1,5 +1,5 @@
 // SwiftExtensions
-// URLMacro.swift
+// URLMacros.swift
 //
 // MIT License
 //
@@ -27,7 +27,7 @@ import Foundation
 
 /// Create a URL from a string literal without an optional
 ///
-/// Use this macro to validate your string literal URL at compile time
+/// Use this macro to validate your string literal URL at compile time and safely unwrap the `URL?` created by the initializer.
 ///
 /// ```swift
 /// let url = #URL("https://www.apple.com")
@@ -43,7 +43,7 @@ import Foundation
 ///
 /// - Parameters:
 ///   - value: A literal string to convert into a `URL`
-///   - strict: Whether or not the string should be evaluated strictly
+///   - strict: Whether or not the string should be evaluated strictly. When `true`, the macro performs additional validation beyond just ensuring that the unwrapping will not fail.
 /// - Returns: A `URL` based on the provided string literal
 @freestanding(expression)
 public macro URL(
@@ -51,7 +51,7 @@ public macro URL(
     strict: Bool = true
 ) -> URL = #externalMacro(module: "FoundationExtensionsCompilerPlugin", type: "URLMacro")
 
-/// Validate a string to ensure it is a legal URL
+/// Validate a string to ensure that it is a legal URL
 ///
 /// The macro makes no alterations to the provided string, but will produce a compile time error of the provided string isn't a legal URL
 ///
