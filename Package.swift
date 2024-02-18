@@ -94,7 +94,8 @@ let package = Package(
         .target(
             name: "UIExtensions",
             dependencies: [
-                "UIExtensionsCompilerPlugin"
+                "UIExtensionsCompilerPlugin",
+                "FoundationExtensions"
             ]
         ),
         .target(
