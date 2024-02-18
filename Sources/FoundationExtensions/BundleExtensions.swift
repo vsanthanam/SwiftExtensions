@@ -23,17 +23,21 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import CoreExtensions
-import Foundation
+#if canImport(Foundation)
 
-public extension Bundle {
+    import CoreExtensions
+    import Foundation
 
-    var shortVersion: String? {
-        try? cast(Bundle.main.infoDictionary?["CFBundleShortVersionString"], to: String.self)
+    public extension Bundle {
+
+        var shortVersion: String? {
+            try? cast(Bundle.main.infoDictionary?["CFBundleShortVersionString"], to: String.self)
+        }
+
+        var version: String? {
+            try? cast(Bundle.main.infoDictionary?["CFBundleVersion"], to: String.self)
+        }
+
     }
 
-    var version: String? {
-        try? cast(Bundle.main.infoDictionary?["CFBundleVersion"], to: String.self)
-    }
-
-}
+#endif

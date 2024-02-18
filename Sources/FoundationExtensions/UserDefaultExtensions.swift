@@ -23,29 +23,33 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import CoreExtensions
-import Foundation
+#if canImport(Foundation)
 
-public extension UserDefaults {
+    import CoreExtensions
+    import Foundation
 
-    func codable<T>(
-        forKey defaultName: String,
-        _ type: T.Type = T.self
-    ) throws -> T? where T: Decodable {
-        guard let data = data(forKey: defaultName) else {
-            return nil
+    public extension UserDefaults {
+
+        func codable<T>(
+            forKey defaultName: String,
+            _ type: T.Type = T.self
+        ) throws -> T? where T: Decodable {
+            guard let data = data(forKey: defaultName) else {
+                return nil
+            }
+            let decoder = JSONDecoder()
+            return try decoder.decode(type, from: data)
         }
-        let decoder = JSONDecoder()
-        return try decoder.decode(type, from: data)
+
+        func set(
+            _ codable: some Encodable,
+            forKey defaultName: String
+        ) throws {
+            let encoder = JSONEncoder()
+            let data = try encoder.encode(codable)
+            setValue(data, forKey: defaultName)
+        }
+
     }
 
-    func set(
-        _ codable: some Encodable,
-        forKey defaultName: String
-    ) throws {
-        let encoder = JSONEncoder()
-        let data = try encoder.encode(codable)
-        setValue(data, forKey: defaultName)
-    }
-
-}
+#endif
