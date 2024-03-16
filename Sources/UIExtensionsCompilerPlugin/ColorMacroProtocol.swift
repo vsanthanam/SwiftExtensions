@@ -59,7 +59,7 @@ public extension ColorMacroProtocol {
         switch input {
         case .string:
             guard case let .stringSegment(literal) = try node.argumentList.first?.expression
-                .as(StringLiteralExprSyntax.self)?
+                .tryAs(StringLiteralExprSyntax.self, message: "#\(name) requires a single string literal expression")
                 .segments.first
                 .unwrap("#\(name) requires a single string literal expression") else {
                 throw MacroError("#\(name) requires a single string literal expression")
@@ -71,8 +71,8 @@ public extension ColorMacroProtocol {
         case .integer:
             let literal = try node.argumentList.first
                 .unwrap("#\(name) requires a single integer literal expression")
-                .expression.as(IntegerLiteralExprSyntax.self)
-                .unwrap("#\(name) requires a single integer literal expression")
+                .expression
+                .tryAs(IntegerLiteralExprSyntax.self, message: "#\(name) requires a single integer literal expression")
                 .literal.text
 
             guard literal.hasPrefix("0x") else {

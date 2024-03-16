@@ -49,6 +49,12 @@ let package = Package(
             targets: [
                 "FoundationExtensions"
             ]
+        ),
+        .library(
+            name: "InitializerExtensions",
+            targets: [
+                "InitializerExtensions"
+            ]
         )
     ],
     dependencies: [
@@ -72,7 +78,8 @@ let package = Package(
                 "CoreExtensions",
                 "UIExtensions",
                 "FoundationExtensions",
-                "CollectionExtensions"
+                "CollectionExtensions",
+                "InitializerExtensions"
             ]
         ),
         .target(
@@ -82,7 +89,7 @@ let package = Package(
             name: "MacroExtensions",
             dependencies: [
                 .product(
-                    name: "SwiftSyntaxMacros",
+                    name: "SwiftSyntax",
                     package: "swift-syntax"
                 ),
                 .product(
@@ -111,6 +118,12 @@ let package = Package(
                 "FoundationExtensionsCompilerPlugin"
             ]
         ),
+        .target(
+            name: "InitializerExtensions",
+            dependencies: [
+                "InitializerExtensionsCompilerPlugin"
+            ]
+        ),
         .macro(
             name: "UIExtensionsCompilerPlugin",
             dependencies: [
@@ -127,6 +140,20 @@ let package = Package(
         ),
         .macro(
             name: "FoundationExtensionsCompilerPlugin",
+            dependencies: [
+                .product(
+                    name: "SwiftSyntaxMacros",
+                    package: "swift-syntax"
+                ),
+                .product(
+                    name: "SwiftCompilerPlugin",
+                    package: "swift-syntax"
+                ),
+                "MacroExtensions",
+            ]
+        ),
+        .macro(
+            name: "InitializerExtensionsCompilerPlugin",
             dependencies: [
                 .product(
                     name: "SwiftSyntaxMacros",
