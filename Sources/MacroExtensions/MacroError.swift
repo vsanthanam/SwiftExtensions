@@ -91,4 +91,15 @@ public extension Optional {
         }
     }
 
+    internal func intenralUnwrap(
+        _ message: () -> String
+    ) throws -> Wrapped {
+        switch self {
+        case let .some(value):
+            return value
+        case .none:
+            throw MacroError(message())
+        }
+    }
+
 }

@@ -1,5 +1,5 @@
 // SwiftExtensions
-// URLStringMacro.swift
+// GenerateInitializerMacro.swift
 //
 // MIT License
 //
@@ -23,40 +23,23 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import Foundation
 import MacroExtensions
 import SwiftCompilerPlugin
 import SwiftSyntax
 import SwiftSyntaxBuilder
 import SwiftSyntaxMacros
 
-public struct URLStringMacro: ExpressionMacro {
-
-    // MARK: - ExpressionMacro
+public struct GenerateInitializerMacro: MemberMacro {
 
     public static func expansion(
-        of node: some FreestandingMacroExpansionSyntax,
+        of node: AttributeSyntax, providingMembersOf declaration: some DeclGroupSyntax,
+
         in context: some MacroExpansionContext
-    ) throws -> ExprSyntax {
-        guard case let .stringSegment(literal) = try node.argumentList.first?.expression
-            .tryAs(StringLiteralExprSyntax.self, message: "#URLString requires a single string literal expression")
-            .segments.first
-            .unwrap("#URLString requires a single string literal expression") else {
-            throw MacroError("#URLString requires a single string literal expression")
-        }
+    ) throws -> [DeclSyntax] {
+        let declaration = try declaration
+            .tryAs(StructDeclSyntax.self)
 
-        return try "\"\(raw: evaluate(literal.content.text))\""
-    }
-
-    // MARK: - Private
-
-    private static func evaluate(_ string: String) throws -> String {
-        let detector = try! NSDataDetector(types: NSTextCheckingResult.CheckingType.link.rawValue)
-        guard let match = detector.firstMatch(in: string, options: [], range: NSRange(location: 0, length: string.utf16.count)),
-              match.range.length == string.utf16.count else {
-            throw MacroError("\"\(string)\" is not a valid URL")
-        }
-        return string
+        return []
     }
 
 }
