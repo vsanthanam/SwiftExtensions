@@ -49,6 +49,8 @@ public protocol ColorMacroProtocol {
 public protocol UIKitColorMacro: ColorMacroProtocol {}
 public protocol AppKitColorMacro: ColorMacroProtocol {}
 public protocol SwiftUIColorMacro: ColorMacroProtocol {}
+public protocol IntegerColorMacro: ColorMacroProtocol {}
+public protocol StringColorMacro: ColorMacroProtocol {}
 
 public extension ColorMacroProtocol {
 
@@ -152,4 +154,12 @@ public extension UIKitColorMacro {
 public extension AppKitColorMacro {
     static var output: ColorOutput { .appkit }
     static var name: String { "NSColor" }
+}
+
+public extension IntegerColorMacro {
+    static var input: ColorInput { .integer }
+}
+
+public extension StringColorMacro {
+    static var input: ColorInput { .string }
 }

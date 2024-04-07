@@ -37,7 +37,7 @@
     /// }
     /// ```
     @freestanding(expression)
-    public macro Color(_ string: String) -> SwiftUI.Color = #externalMacro(module: "UIExtensionsCompilerPlugin", type: "ColorStringMacro")
+    public macro Color(_ string: String) -> SwiftUI.Color = #externalMacro(module: "UIExtensionsCompilerPlugin", type: "SwiftUIColorStringMacro")
 
     /// Create a SwiftUI Color from a hexidecimal integer
     ///
@@ -50,7 +50,23 @@
     /// }
     /// ```
     @freestanding(expression)
-    public macro Color(_ integer: Int) -> SwiftUI.Color = #externalMacro(module: "UIExtensionsCompilerPlugin", type: "ColorIntegerMacro")
+    public macro Color(_ integer: Int) -> SwiftUI.Color = #externalMacro(module: "UIExtensionsCompilerPlugin", type: "SwiftUIColorIntegerMacro")
+
+    /// Create a SwiftUI Image from an SF Symbol identifier
+    ///
+    /// The macro will produce a compiler error if an in valid identifeir is provided
+    ///
+    /// ```swift
+    /// struct MyView: View {
+    ///
+    ///     var body: some View {
+    ///         #Symbol("apple.terminal.fill")
+    ///     }
+    ///
+    /// }
+    /// ```
+    @freestanding(expression)
+    public macro Symbol(_ systemName: String) -> SwiftUI.Image = #externalMacro(module: "UIExtensionsCompilerPlugin", type: "SymbolMacro")
 #endif
 
 #if canImport(UIKit)

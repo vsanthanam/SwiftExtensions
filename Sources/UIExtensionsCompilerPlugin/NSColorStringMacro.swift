@@ -25,6 +25,4 @@
 
 import SwiftSyntaxMacros
 
-public struct NSColorStringMacro: ExpressionMacro, AppKitColorMacro {
-    public static var input: ColorInput { .string }
-}
+public struct NSColorStringMacro: ExpressionMacro, AppKitColorMacro, StringColorMacro {}

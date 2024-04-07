@@ -29,11 +29,12 @@ import SwiftSyntaxMacros
 @main
 struct CoreExtensionsCompilerPlugin: CompilerPlugin {
     let providingMacros: [Macro.Type] = [
-        ColorStringMacro.self,
-        ColorIntegerMacro.self,
+        SwiftUIColorStringMacro.self,
+        SwiftUIColorIntegerMacro.self,
         UIColorStringMacro.self,
         UIColorIntegerMacro.self,
         NSColorStringMacro.self,
         NSColorIntegerMacro.self,
+        SymbolMacro.self
     ]
 }

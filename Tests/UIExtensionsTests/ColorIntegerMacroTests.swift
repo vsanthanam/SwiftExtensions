@@ -40,7 +40,7 @@ final class ColorIntegerMacroTests: XCTestCase {
             let x = SwiftUI.Color(red: 0.0, green: 1.0, blue: 1.0)
             """,
             macros: [
-                "Color": ColorIntegerMacro.self
+                "Color": SwiftUIColorIntegerMacro.self
             ]
         )
 
@@ -53,7 +53,7 @@ final class ColorIntegerMacroTests: XCTestCase {
             let x = SwiftUI.Color(red: 0.0, green: 1.0, blue: 1.0)
             """,
             macros: [
-                "Color": ColorIntegerMacro.self
+                "Color": SwiftUIColorIntegerMacro.self
             ]
         )
 
@@ -66,7 +66,7 @@ final class ColorIntegerMacroTests: XCTestCase {
             let x = SwiftUI.Color(red: 0.0, green: 1.0, blue: 1.0, opacity: 0.0)
             """,
             macros: [
-                "Color": ColorIntegerMacro.self
+                "Color": SwiftUIColorIntegerMacro.self
             ]
         )
 
@@ -79,7 +79,7 @@ final class ColorIntegerMacroTests: XCTestCase {
             let x = SwiftUI.Color(red: 0.0, green: 1.0, blue: 1.0, opacity: 0.0)
             """,
             macros: [
-                "Color": ColorIntegerMacro.self
+                "Color": SwiftUIColorIntegerMacro.self
             ]
         )
 
