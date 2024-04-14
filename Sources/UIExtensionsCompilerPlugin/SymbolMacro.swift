@@ -44,7 +44,7 @@ public struct SymbolMacro: ExpressionMacro {
         guard case let .stringSegment(literal) = try node.argumentList.first?.expression
             .as(StringLiteralExprSyntax.self)?
             .segments.first
-            .unwrap("#Symbol requires a single string literal expression") else {
+            .require("#Symbol requires a single string literal expression") else {
             throw MacroError("#Symbol requires a single string literal expression")
         }
 

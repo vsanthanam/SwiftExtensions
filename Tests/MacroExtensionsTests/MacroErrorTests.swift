@@ -47,12 +47,12 @@ final class MacroErrorTests: XCTestCase {
 
     func test_unwrap_throws() {
         let val: Bool? = nil
-        XCTAssertThrowsError(try val.unwrap())
+        XCTAssertThrowsError(try val.require())
     }
 
     func test_unwrap_doesnt_throws() {
         let val: Bool? = false
-        XCTAssertNoThrow(try val.unwrap())
+        XCTAssertNoThrow(try val.require())
     }
 
 }
