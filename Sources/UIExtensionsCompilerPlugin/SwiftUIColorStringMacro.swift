@@ -1,5 +1,5 @@
 // SwiftExtensions
-// ColorIntegerMacro.swift
+// SwiftUIColorStringMacro.swift
 //
 // MIT License
 //
@@ -25,6 +25,4 @@
 
 import SwiftSyntaxMacros
 
-public struct ColorIntegerMacro: ExpressionMacro, SwiftUIColorMacro {
-    public static var input: ColorInput { .integer }
-}
+public struct SwiftUIColorStringMacro: ExpressionMacro, SwiftUIColorMacro, StringColorMacro {}

@@ -1,4 +1,4 @@
-// swift-tools-version: 5.9
+// swift-tools-version: 5.10
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import CompilerPluginSupport
@@ -62,7 +62,7 @@ let package = Package(
         ),
         .package(
             url: "https://github.com/nicklockwood/SwiftFormat",
-            exact: "0.53.2"
+            exact: "0.53.6"
         ),
     ],
     targets: [
