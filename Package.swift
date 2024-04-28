@@ -49,12 +49,18 @@ let package = Package(
             targets: [
                 "FoundationExtensions"
             ]
+        ),
+        .library(
+            name: "ConcurrencyExtensions",
+            targets: [
+                "ConcurrencyExtensions"
+            ]
         )
     ],
     dependencies: [
         .package(
             url: "https://github.com/apple/swift-syntax.git",
-            from: "509.1.0"
+            from: "510.0.1"
         ),
         .package(
             url: "https://github.com/apple/swift-docc-plugin.git",
@@ -62,7 +68,7 @@ let package = Package(
         ),
         .package(
             url: "https://github.com/nicklockwood/SwiftFormat",
-            exact: "0.53.6"
+            exact: "0.53.8"
         ),
     ],
     targets: [
@@ -72,7 +78,8 @@ let package = Package(
                 "CoreExtensions",
                 "UIExtensions",
                 "FoundationExtensions",
-                "CollectionExtensions"
+                "CollectionExtensions",
+                "ConcurrencyExtensions"
             ]
         ),
         .target(
@@ -109,6 +116,12 @@ let package = Package(
             dependencies: [
                 "CoreExtensions",
                 "FoundationExtensionsCompilerPlugin"
+            ]
+        ),
+        .target(
+            name: "ConcurrencyExtensions",
+            dependencies: [
+                "CollectionExtensions"
             ]
         ),
         .macro(
