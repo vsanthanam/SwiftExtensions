@@ -37,7 +37,12 @@
     /// }
     /// ```
     @freestanding(expression)
-    public macro Color(_ string: String) -> SwiftUI.Color = #externalMacro(module: "UIExtensionsCompilerPlugin", type: "SwiftUIColorStringMacro")
+    public macro Color(
+        _ string: String
+    ) -> SwiftUI.Color = #externalMacro(
+        module: "UIExtensionsCompilerPlugin",
+        type: "SwiftUIColorStringMacro"
+    )
 
     /// Create a SwiftUI Color from a hexidecimal integer
     ///
@@ -50,7 +55,12 @@
     /// }
     /// ```
     @freestanding(expression)
-    public macro Color(_ integer: Int) -> SwiftUI.Color = #externalMacro(module: "UIExtensionsCompilerPlugin", type: "SwiftUIColorIntegerMacro")
+    public macro Color(
+        _ integer: Int
+    ) -> SwiftUI.Color = #externalMacro(
+        module: "UIExtensionsCompilerPlugin",
+        type: "SwiftUIColorIntegerMacro"
+    )
 
     /// Create a SwiftUI Image from an SF Symbol identifier
     ///
@@ -66,25 +76,78 @@
     /// }
     /// ```
     @freestanding(expression)
-    public macro Symbol(_ systemName: String) -> SwiftUI.Image = #externalMacro(module: "UIExtensionsCompilerPlugin", type: "SymbolMacro")
+    public macro Symbol(
+        _ systemName: String
+    ) -> SwiftUI.Image = #externalMacro(
+        module: "UIExtensionsCompilerPlugin",
+        type: "SymbolMacro"
+    )
 #endif
 
 #if canImport(UIKit)
     import UIKit
 
+    /// Create a UIColor from a hexidecimal string
+    ///
+    /// Properly formatted string should be prefixed with `#`, and contain exactly 6 or 8 characters
+    ///
+    /// ```swift
+    /// let color = #UIColor("#008080")
+    /// ```
     @freestanding(expression)
-    public macro UIColor(_ string: String) -> UIKit.UIColor = #externalMacro(module: "UIExtensionsCompilerPlugin", type: "UIColorStringMacro")
+    public macro UIColor(
+        _ string: String
+    ) -> UIKit.UIColor = #externalMacro(
+        module: "UIExtensionsCompilerPlugin",
+        type: "UIColorStringMacro"
+    )
 
+    /// Create a UIColor from a hexidecimal integer
+    ///
+    /// Properly formatted integers should contain exactly 6 or 8 digits
+    ///
+    /// ```swift
+    /// let color = #UIColor(0x008080)
+    /// ```
     @freestanding(expression)
-    public macro UIColor(_ integer: Int) -> UIKit.UIColor = #externalMacro(module: "UIExtensionsCompilerPlugin", type: "UIColorIntegerMacro")
+    public macro UIColor(
+        _ integer: Int
+    ) -> UIKit.UIColor = #externalMacro(
+        module: "UIExtensionsCompilerPlugin",
+        type: "UIColorIntegerMacro"
+    )
 #endif
 
 #if canImport(AppKit)
     import AppKit
 
+    /// Create an NSColor from a hexidecimal string
+    ///
+    /// Properly formatted string should be prefixed with `#`, and contain exactly 6 or 8 characters
+    ///
+    /// ```swift
+    /// let color = #NSColor("#008080")
+    /// ```
     @freestanding(expression)
-    public macro NSColor(_ string: String) -> AppKit.NSColor = #externalMacro(module: "UIExtensionsCompilerPlugin", type: "NSColorStringMacro")
+    public macro NSColor(
+        _ string: String
+    ) -> AppKit.NSColor = #externalMacro(
+        module: "UIExtensionsCompilerPlugin",
+        type: "NSColorStringMacro"
+    )
 
+    /// Create an NSColor from a hexidecimal integer
+    ///
+    /// Properly formatted integers should contain exactly 6 or 8 digits
+    ///
+    /// ```swift
+    /// let color = #NSColor(0x008080)
+    /// ```
     @freestanding(expression)
-    public macro NSColor(_ integer: Int) -> AppKit.NSColor = #externalMacro(module: "UIExtensionsCompilerPlugin", type: "NSColorIntegergMacro")
+    public macro NSColor(
+        _ integer: Int
+    ) -> AppKit.NSColor = #externalMacro(
+        module: "UIExtensionsCompilerPlugin",
+        type: "NSColorIntegergMacro"
+    )
 #endif
