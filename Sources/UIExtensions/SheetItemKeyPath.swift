@@ -37,44 +37,46 @@
         /// `InventoryItem` that the `content` closure uses to populate the display
         /// the action sheet shows to the user:
         ///
-        ///     struct ShowPartDetail: View {
-        ///         @State private var sheetDetail: InventoryItem?
+        /// ```swift
+        /// struct ShowPartDetail: View {
         ///
-        ///         var body: some View {
-        ///             Button("Show Part Details") {
-        ///                 sheetDetail = InventoryItem(
-        ///                     id: "0123456789",
-        ///                     partNumber: "Z-1234A",
-        ///                     quantity: 100,
-        ///                     name: "Widget"
-        ///                 )
-        ///             }
-        ///             .sheet(item: $sheetDetail,
-        ///                    id: \.uniqueIdentifier,
-        ///                    onDismiss: didDismiss) { detail in
-        ///                 VStack(alignment: .leading, spacing: 20) {
-        ///                     Text("Part Number: \(detail.partNumber)")
-        ///                     Text("Name: \(detail.name)")
-        ///                     Text("Quantity On-Hand: \(detail.quantity)")
-        ///                 }
-        ///                 .onTapGesture {
-        ///                     sheetDetail = nil
-        ///                 }
-        ///             }
+        ///     @State private var sheetDetail: InventoryItem?
+        ///
+        ///     var body: some View {
+        ///         Button("Show Part Details") {
+        ///             sheetDetail = InventoryItem(
+        ///                 uniqueIdentifier: "0123456789",
+        ///                 partNumber: "Z-1234A",
+        ///                 quantity: 100,
+        ///                 name: "Widget"
+        ///             )
         ///         }
-        ///
-        ///         func didDismiss() {
-        ///             // Handle the dismissing action.
+        ///         .sheet(item: $sheetDetail,
+        ///                id: \.uniqueIdentifier,
+        ///                onDismiss: didDismiss) { detail in
+        ///             VStack(alignment: .leading, spacing: 20) {
+        ///                 Text("Part Number: \(detail.partNumber)")
+        ///                 Text("Name: \(detail.name)")
+        ///                 Text("Quantity On-Hand: \(detail.quantity)")
+        ///             }
+        ///             .onTapGesture {
+        ///                 sheetDetail = nil
+        ///             }
         ///         }
         ///     }
         ///
-        ///     struct InventoryItem {
-        ///         var uniqueIdentifier: String
-        ///         let partNumber: String
-        ///         let quantity: Int
-        ///         let name: String
+        ///     func didDismiss() {
+        ///         // Handle the dismissing action.
         ///     }
+        /// }
         ///
+        /// struct InventoryItem {
+        ///     var uniqueIdentifier: String
+        ///     let partNumber: String
+        ///     let quantity: Int
+        ///     let name: String
+        /// }
+        /// ```
         ///
         /// In vertically compact environments, such as iPhone in landscape
         /// orientation, a sheet presentation automatically adapts to appear as a
@@ -92,22 +94,20 @@
         ///   - id: A key path used to differentiate between the identities of different instances of `Item`
         ///   - onDismiss: The closure to execute when dismissing the sheet.
         ///   - content: A closure returning the content of the sheet.
-        @ViewBuilder
         func sheet<Item, ID, Content>(
             item: Binding<Item?>,
             id: KeyPath<Item, ID>,
             onDismiss: (() -> Void)? = nil,
             @ViewBuilder content: @escaping (Item) -> Content
         ) -> some View where ID: Hashable, Content: View {
-            let modifier = SheetItemKeyPathViewModifier(
-                item: item,
-                id: id,
-                onDismiss: onDismiss,
-                content: content
-            )
             ModifiedContent(
                 content: self,
-                modifier: modifier
+                modifier: SheetItemKeyPathViewModifier(
+                    item: item,
+                    id: id,
+                    onDismiss: onDismiss,
+                    content: content
+                )
             )
         }
 

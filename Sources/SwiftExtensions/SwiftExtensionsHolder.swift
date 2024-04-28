@@ -24,6 +24,7 @@
 // SOFTWARE.
 
 @_exported import CollectionExtensions
+@_exported import ConcurrencyExtensions
 @_exported import CoreExtensions
 
 #if canImport(SwiftUI) || canImport(AppKit) || canImport(UIKit)
